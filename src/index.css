@@ -16,8 +16,8 @@
     --secondary-foreground: 207, 89%, 86%;
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 207, 90, 61;
-    --accent-foreground: 207, 90, 61;
+    --accent: 207, 90%, 61%;
+    --accent-foreground: 207, 90%, 61%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
     --border: 214.3 31.8% 91.4%;
@@ -66,4 +66,11 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.text-gradient {
+  background: #0d47a1;
+  background: linear-gradient(120deg, #0d47a1 0%, #42a5f5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
