@@ -7,7 +7,7 @@ const TestimonialSlide = () => {
     loop: true,
   });
   return (
-    <div className="bg-secondary p-5 md:p-0">
+    <div className="bg-muted p-5 md:p-0 rounded-xl">
       <div
         ref={sliderRef}
         className="keen-slider md:h-96 bg-transparent  mb-24 p-2 rounded-xl shadow-2xl"

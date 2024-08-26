@@ -23,7 +23,7 @@ const Header = () => {
           {/* for search bar */}
           <div  className="flex justify-center gap-2">
 
-            <Input placeholder="Search for bikes" className=" shadow-2xl" />
+            <Input placeholder="Search for bikes" className=" shadow-2xl placeholder:text-gray-500" />
             <Button className="">Search</Button>
           </div>
         </div>
