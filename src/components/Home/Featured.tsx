@@ -3,8 +3,12 @@ import img from "@/assets/header.png";
 import test from "@/assets/test.png";
 import { Button } from "../ui/button";
 import SectionHeading from "../ui/SectionHeading";
+import { useGetAllBikesQuery } from "@/redux/api/bike/bikeApi";
 
 const Featured = () => {
+  const {data, error, isLoading} = useGetAllBikesQuery('')
+  const bikes = data?.data
+console.log(bikes);
   return (
     <div className="space-y-5 mt-16 p-5 md:p-9">
       {/* heading */}
