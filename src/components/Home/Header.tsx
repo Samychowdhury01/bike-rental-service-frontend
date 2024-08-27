@@ -5,12 +5,12 @@ import { Button } from "../ui/button";
 const Header = () => {
   return (
     <div>
-      <div
-        className="md:h-[768px] bg-contain bg-current flex justify-center pt-40"
-        style={{ backgroundImage: `url(${img})` }}
-      >
-        <div className="w-1/2 space-y-5">
-          <p className="text-gradient text-5xl font-bold">
+     <div
+  className="h-screen md:h-[768px] bg-cover bg-right md:bg-bottom flex justify-center  pt-10 md:pt-28 px-5 md:px-0"
+  style={{ backgroundImage: `url(${img})`,}}
+>
+        <div className="md:w-1/2 space-y-5">
+          <p className="text-gradient text-2xl md:text-5xl font-bold">
             Escape the Ordinary, Ride Extraordinary!
           </p>
           <p>

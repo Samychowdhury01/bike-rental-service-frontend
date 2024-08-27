@@ -3,14 +3,14 @@ import support from "@/assets/support.json";
 import Lottie from "lottie-react";
 const ChooseUs = () => {
   return (
-    <div>
+    <div className="p-5 md:p-0">
       {/* heading */}
       <div className="text-center">
-        <h1 className="text-5xl text-primary font-semibold">Why Choose Us</h1>
+        <h1 className="text-2xl md:text-5xl text-primary font-semibold">Why Choose Us</h1>
         {/* underline */}
         <div className="bg-secondary h-2 w-1/4 mx-auto rounded-full mb-5"></div>
         {/* description */}
-        <p className="w-1/2 mx-auto">
+        <p className="md:w-1/2 mx-auto">
           Discover what sets us apart in the Why Choose Us section, where we
           highlight our commitment to quality, exceptional service, and a
           passion for providing the best biking experience tailored to your
@@ -19,7 +19,7 @@ const ChooseUs = () => {
       </div>
       {/* body */}
       <div className="space-y-5 mt-5">
-        <div className="flex items-center">
+        <div className="flex flex-col-reverse md:flex-row items-center">
           {/* details */}
           <div className="flex-1 w-full">
             <h2 className="text-3xl font-bold">Wide Selection</h2>
@@ -35,7 +35,7 @@ const ChooseUs = () => {
                 in the market.
               </li>
               <li>
-                <span className="font-semibold">Customization Options:</span>{" "}
+                <span className="font-semibold">Customization Options:</span>
                 Personalize your ride with various accessories and upgrades
                 tailored to your preferences.
               </li>
@@ -51,7 +51,7 @@ const ChooseUs = () => {
           </div>
         </div>
 
-        <div className="flex items-center">
+        <div className="flex flex-col md:flex-row items-center">
           {/* image container */}
           <div className="flex-1">
             <Lottie

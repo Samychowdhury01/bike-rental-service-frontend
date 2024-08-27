@@ -8,10 +8,10 @@ const HomeContainer = () => {
   return (
     <>
       <Header />
-      <Featured />
+       <Featured />
       <Testimonials />
       <ChooseUs />
-      <Coupon />
+     <Coupon />
     </>
   );
 };

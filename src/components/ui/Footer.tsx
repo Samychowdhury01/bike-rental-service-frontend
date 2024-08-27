@@ -4,8 +4,8 @@ import { FaSquareXTwitter } from "react-icons/fa6";
 const Footer = () => {
   return (
     <>
-      <footer className="bg-[#EFF2F9] ">
-        <div className="py-16 my-10 flex items-center justify-around">
+      <footer className="bg-[#EFF2F9] p-5 md:p-0">
+        <div className="py-16 my-10 flex flex-col md:flex-row md:items-center justify-around space-y-5 md:space-y-0">
           {/* logo and short description */}
           <div>
             <h1 className=" text-gradient text-2xl md:text-3xl font-bold">
@@ -33,16 +33,16 @@ const Footer = () => {
             <h4 className="text-lg font-semibold">Follow us on:</h4>
             <ul>
               <li className="flex items-center gap-2">
-                <FaFacebookSquare className="text-xl" /> <p>Facebook</p>
+                <FaFacebookSquare className="md:text-xl" /> <p>Facebook</p>
               </li>
               <li className="flex items-center gap-2">
-                <FaLinkedin className="text-xl" /> <p>LinkedIn</p>
+                <FaLinkedin className="md:text-xl" /> <p>LinkedIn</p>
               </li>
               <li className="flex items-center gap-2">
-                <FaSquareXTwitter  className="text-xl" /> <p>Twitter</p>
+                <FaSquareXTwitter className="md:text-xl" /> <p>Twitter</p>
               </li>
               <li className="flex items-center gap-2">
-                <FaYoutube className="text-xl" /> <p>Youtube</p>
+                <FaYoutube className="md:text-xl" /> <p>Youtube</p>
               </li>
             </ul>
           </div>
