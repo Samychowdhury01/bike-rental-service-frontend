@@ -5,7 +5,7 @@ const Testimonials = () => {
       {/* heading */}
       <div className="text-center ">
         <h1 className="text-5xl text-primary font-semibold">Testimonials</h1>
-        <div className="bg-secondary h-2 w-1/4 mx-auto rounded-full mb-5"></div>
+        <div className="bg-secondary h-2 w-1/5 mx-auto rounded-full mb-5"></div>
         {/* description */}
         <p className="w-1/2 mx-auto">
           Hear from our satisfied riders in the Testimonials section, where real

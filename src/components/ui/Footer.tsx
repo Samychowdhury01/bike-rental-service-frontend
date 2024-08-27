@@ -48,7 +48,7 @@ const Footer = () => {
           </div>
         </div>
         <p className="text-center">
-          &copy; 2023 RideWave. All rights reserved.
+          &copy; 2024 RideWave. All rights reserved.
         </p>
       </footer>
     </>
