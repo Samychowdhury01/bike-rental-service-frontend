@@ -1,22 +1,19 @@
 import selection from "@/assets/selection.json";
 import support from "@/assets/support.json";
 import Lottie from "lottie-react";
+import SectionHeading from "../ui/SectionHeading";
 const ChooseUs = () => {
   return (
-    <div  className="space-y-5 mt-16 p-5 md:p-0">
+    <div className="space-y-5 mt-16 p-5 md:p-0">
       {/* heading */}
-      <div className="text-center">
-        <h1 className="text-2xl md:text-5xl text-primary font-semibold">Why Choose Us</h1>
-        {/* underline */}
-        <div className="bg-secondary h-2 w-1/4 mx-auto rounded-full mb-5"></div>
-        {/* description */}
-        <p className="md:w-1/2 mx-auto">
-          Discover what sets us apart in the Why Choose Us section, where we
+      <SectionHeading
+        title="Why Choose Us"
+        text=" Discover what sets us apart in the Why Choose Us section, where we
           highlight our commitment to quality, exceptional service, and a
           passion for providing the best biking experience tailored to your
-          needs.
-        </p>
-      </div>
+          needs."
+          width="w-1/4"
+      />
       {/* body */}
       <div className="space-y-5 mt-5">
         <div className="flex flex-col-reverse md:flex-row items-center">
