@@ -1,4 +1,5 @@
 import ChooseUs from "./ChooseUs";
+import ContactUs from "./ContactUs";
 import Coupon from "./Coupon";
 import Featured from "./Featured";
 import Header from "./Header";
@@ -12,6 +13,7 @@ const HomeContainer = () => {
       <Testimonials />
       <ChooseUs />
      <Coupon />
+     <ContactUs/>
     </>
   );
 };

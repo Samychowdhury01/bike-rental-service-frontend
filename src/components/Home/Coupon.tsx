@@ -2,7 +2,7 @@ import WheelComponent from "./WheelComponent";
 
 const Coupon = () => {
   return (
-    <div className="p-5 md:p-0">
+    <div  className="space-y-5 mt-16 p-5 md:p-0">
       {/* Heading section */}
       <div className="text-center">
         <h1 className="text-2xl md:text-5xl text-primary font-semibold">Coupon</h1>
