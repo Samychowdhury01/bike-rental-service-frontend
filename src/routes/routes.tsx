@@ -4,25 +4,42 @@ import Auth from "@/pages/Auth/Auth";
 import Home from "@/pages/Home/Home";
 
 import { createBrowserRouter } from "react-router-dom";
+import PrivateRoute from "./PrivateRoute";
+import DashboardLayout from "@/components/layouts/DashboardLayout";
+import Profile from "@/pages/Profile/Profile";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <MainLayout/>,
+    element: <MainLayout />,
     children: [
       {
         path: "/",
-        element: <Home/>,
-        },
+        element: <Home />,
+      },
       {
         path: "/about",
-        element: <AboutUs/>,
-        },
+        element: <AboutUs />,
+      },
       {
         path: "/auth",
-        element: <Auth/>,
-        },
-      ]
+        element: (
+          <PrivateRoute>
+            <Auth />
+          </PrivateRoute>
+        ),
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <DashboardLayout />,
+    children: [
+      {
+        path: "/dashboard",
+        element: <Profile/>,
+      },
+    ],
   },
 ]);
 

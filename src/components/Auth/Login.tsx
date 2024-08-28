@@ -19,8 +19,12 @@ import { useCookies } from "react-cookie";
 import { useAppDispatch } from "@/redux/hook";
 import { jwtDecode } from "jwt-decode";
 import { addUserInfo } from "@/redux/features/userInfoSlice";
+import {  useNavigate } from "react-router-dom";
+import { setToken } from "@/redux/features/tokenSlice";
 
 const Login = () => {
+  // location path
+  const navigate = useNavigate();
   // redux
   const [login, { isLoading }] = useLoginMutation();
   // dispatch function
@@ -39,27 +43,43 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   // cookies for testing
-  const [cookies, setCookie] = useCookies(["token"]);
+  const [, setCookie] = useCookies(["token"]);
 
   // onSubmit handler
   const onSubmit = async (data) => {
     setErrorMessage("");
-    const response = await login(data);
+    try {
+      const response = await login(data);
 
-    if (response.data) {
-      setCookie("token", response.data.token);
-      const decoded = jwtDecode(cookies.token);
-      dispatch(addUserInfo(decoded));
-      Swal.fire({
-        icon: "success",
-        title: "Success",
-        text: response.data.message,
-      });
+      if (response.data && response.data.token) {
+        // Store the token directly from the response
+        const token = response.data.token;
 
-      setErrorMessage("");
-    } else {
-      setErrorMessage(response.error.data.message);
-      reset();
+        // Set the cookie with the token
+        setCookie("token", token);
+
+        // Decode the token directly from the response
+        const decoded = jwtDecode(token);
+        // setting the data in state
+        dispatch(addUserInfo(decoded));
+        // setting the token in state
+        dispatch(setToken(token));
+
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: response.data.message,
+        });
+
+        navigate("/dashboard");
+        setErrorMessage("");
+      } else {
+        setErrorMessage(response.error.data.message);
+        reset();
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+      setErrorMessage("An unexpected error occurred. Please try again.");
     }
   };
   return (

@@ -1,7 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-  user: {}
+type TUser = {
+  userId?: string;
+  exp?: number;
+  iat?: number;
+  username?: string;
+  userRole?: string;
+};
+type TUserState = {
+  user: TUser ;
+};
+const initialState: TUserState = {
+  user: {},
 };
 
 const userInfoSlice = createSlice({
@@ -9,8 +19,8 @@ const userInfoSlice = createSlice({
   initialState,
   reducers: {
     addUserInfo(state, action) {
-      console.log(action.payload, 'from userinfo slice');
-      state.user = {...action.payload};
+      console.log(action.payload, "from userinfo slice");
+      state.user = { ...action.payload };
     },
   },
 });
