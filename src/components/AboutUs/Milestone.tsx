@@ -1,5 +1,6 @@
+import Lottie from "lottie-react";
 import SectionHeading from "../ui/SectionHeading";
-
+import achivement from '@/assets/achivement.json'
 const Milestone = () => {
   const historyMilestones = [
     {
@@ -37,9 +38,13 @@ const Milestone = () => {
   return (
     <div className="space-y-5 mt-16 p-5 md:p-0">
       <SectionHeading title="Our Milestones" text="" width="w-1/4" />
+     <div className="flex flex-col md:flex-row items-center gap-5">
       <div>
+        <Lottie animationData={achivement} loop={true} className="h-[300px] w-[400px]"/>
+      </div>
+     <div className="flex-1 text-justify">
         <p className="text-xl font-semibold mb-5">Our Journey:</p>
-        <ul className="space-y-2 list-disc">
+        <ul className="space-y-2">
           {historyMilestones.map((milestone, index) => (
             <li key={index}>
               <p>
@@ -50,6 +55,7 @@ const Milestone = () => {
           ))}
         </ul>
       </div>
+     </div>
     </div>
   );
 };

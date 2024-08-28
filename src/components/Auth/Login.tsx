@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -10,43 +11,67 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { FieldErrors, FieldValues, useForm } from "react-hook-form";
-const SignUp = ({ setActiveTab }) => {
+import Swal from "sweetalert2";
+import { useLoginMutation } from "@/redux/api/auth/authApi";
+import Spinner from "../ui/Spinner";
+import { useState } from "react";
+import { useCookies } from "react-cookie";
+import { useAppDispatch } from "@/redux/hook";
+import { jwtDecode } from "jwt-decode";
+import { addUserInfo } from "@/redux/features/userInfoSlice";
+
+const Login = () => {
+  // redux
+  const [login, { isLoading }] = useLoginMutation();
+  // dispatch function
+  const dispatch = useAppDispatch();
+
+  // react-form-hook
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
+  // type for form-hook error
   const typedErrors = errors as FieldErrors<FieldValues>;
-  const onSubmit = (data) => {
-   
-    if(data){
-        const userInfo = {...data, role: 'user'}
-        
+  // error message state
+  const [errorMessage, setErrorMessage] = useState("");
+
+  // cookies for testing
+  const [cookies, setCookie] = useCookies(["token"]);
+
+  // onSubmit handler
+  const onSubmit = async (data) => {
+    setErrorMessage("");
+    const response = await login(data);
+
+    if (response.data) {
+      setCookie("token", response.data.token);
+      const decoded = jwtDecode(cookies.token);
+      dispatch(addUserInfo(decoded));
+      Swal.fire({
+        icon: "success",
+        title: "Success",
+        text: response.data.message,
+      });
+
+      setErrorMessage("");
+    } else {
+      setErrorMessage(response.error.data.message);
+      reset();
     }
-  }
+  };
   return (
     <>
       <Card>
         <CardHeader>
-          <CardTitle>Password</CardTitle>
+          <CardTitle>Login</CardTitle>
           <CardDescription className="text-black">
-            Create an account to start exploring and enjoying the freedom of
-            eco-friendly rides.
+            Log in to your account to continue your journey with RideWave.
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-2">
-          <div className="space-y-1">
-            <Label htmlFor="name">Name</Label>
-            <Input
-              placeholder="Your Name"
-              id="name"
-              type="text"
-              {...register("name", { required: true })}
-            />
-            {typedErrors.name && (
-              <p className="text-red-500 text-sm">Name is Required</p>
-            )}
-          </div>
           <div className="space-y-1">
             <Label htmlFor="email">Email</Label>
             <Input
@@ -78,37 +103,18 @@ const SignUp = ({ setActiveTab }) => {
               </p>
             )}
           </div>
-          <div className="space-y-1">
-            <Label htmlFor="phone">Phone No.</Label>
-            <Input
-              placeholder="Your Phone No."
-              id="phone"
-              type="number"
-              {...register("phone", { required: true, max: 11, min: -1 })}
-            />
-            {typedErrors.phone && (
-              <p className="text-red-500 text-sm">Phone number is required</p>
-            )}
-          </div>
-          <div className="space-y-1">
-            <Label htmlFor="address">Address</Label>
-            <Input
-              placeholder="Your Address"
-              id="address"
-              type="text"
-              {...register("address", { required: true })}
-            />
-            {typedErrors.address && (
-              <p className="text-red-500 text-sm">Address is Required</p>
-            )}
-          </div>
+          <p className="text-red-500 text-sm">{errorMessage}</p>
         </CardContent>
         <CardFooter>
-          <Button onClick={handleSubmit(onSubmit)}>Sign-up</Button>
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            <Button onClick={handleSubmit(onSubmit)}>Login</Button>
+          )}
         </CardFooter>
       </Card>
     </>
   );
 };
 
-export default SignUp;
+export default Login;

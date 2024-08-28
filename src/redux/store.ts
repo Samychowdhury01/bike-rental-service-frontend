@@ -1,10 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { baseApi } from "./api/api";
-
+import userReducer from './features/userInfoSlice'
 export const store = configureStore({
   reducer: {
     //  Add the generated reducer as a specific top-level slice
     [baseApi.reducerPath]: baseApi.reducer,
+    userInfo : userReducer
     // Add your reducers here
   },
   middleware: (getDefaultMiddleware) =>

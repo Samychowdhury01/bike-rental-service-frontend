@@ -13,7 +13,7 @@ const WheelComponent = () => {
   const [couponCode, setCouponCode] = useState("");
 
   const data = [
-    { option: "10", coupon: "fgkfjglkfj" },
+    { option: "10", coupon: "getYour10" },
     { option: "20", coupon: "abc123xyz" },
     { option: "30", coupon: "promo30off" },
     { option: "50", coupon: "save50now" },

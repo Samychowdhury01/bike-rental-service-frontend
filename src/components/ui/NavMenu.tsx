@@ -2,6 +2,7 @@ import { useState } from "react";
 import ActiveLink from "./ActiveLink";
 import { Button } from "./button";
 import { HiMenuAlt1, HiX } from "react-icons/hi";
+import { NavLink } from "react-router-dom";
 
 const NavMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,7 +21,7 @@ const NavMenu = () => {
       </li>
       <li>
         <Button variant="outline">
-          <ActiveLink to="/auth">Login</ActiveLink>
+          <NavLink to="/auth">Login</NavLink>
         </Button>
       </li>
     </>
@@ -39,7 +40,7 @@ const NavMenu = () => {
         <ul
           className={`transition-all duration-300 ease-in-out transform ${
             isOpen
-              ? "opacity-100 max-h-screen"
+              ? "opacity-100 max-h-screen p-5"
               : "opacity-0 max-h-0 overflow-hidden"
           }`}
         >

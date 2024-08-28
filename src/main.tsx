@@ -5,11 +5,13 @@ import "./index.css";
 import router from "./routes/routes";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
-
+import { CookiesProvider } from "react-cookie";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <CookiesProvider>
+        <RouterProvider router={router} />
+      </CookiesProvider>
     </Provider>
   </StrictMode>
 );
