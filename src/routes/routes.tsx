@@ -9,6 +9,7 @@ import DashboardLayout from "@/components/layouts/DashboardLayout";
 import Profile from "@/pages/Profile/Profile";
 import Bikes from "@/pages/Bikes/Bikes";
 import User from "@/pages/User/User";
+import Coupon from "@/pages/Coupon/Coupon";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/users",
         element: <User/>,
+      },
+      {
+        path: "/dashboard/coupons",
+        element: <Coupon/>,
       },
     ],
   },

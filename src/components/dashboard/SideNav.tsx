@@ -28,7 +28,10 @@ const SideNav = () => {
         <SideActiveLink to="/dashboard/rentals">Rentals</SideActiveLink>
       </li>
       <li>
-        <SideActiveLink to="/dashboard/users">users</SideActiveLink>
+        <SideActiveLink to="/dashboard/users">User Management</SideActiveLink>
+      </li>
+      <li>
+        <SideActiveLink to="/dashboard/coupons">Coupon</SideActiveLink>
       </li>
     </>
   );
