@@ -8,6 +8,7 @@ import PrivateRoute from "./PrivateRoute";
 import DashboardLayout from "@/components/layouts/DashboardLayout";
 import Profile from "@/pages/Profile/Profile";
 import Bikes from "@/pages/Bikes/Bikes";
+import User from "@/pages/User/User";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/bikes",
         element: <Bikes/>,
+      },
+      {
+        path: "/dashboard/users",
+        element: <User/>,
       },
     ],
   },

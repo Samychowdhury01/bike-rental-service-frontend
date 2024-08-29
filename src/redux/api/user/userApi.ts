@@ -10,6 +10,15 @@ const userApi = baseApi.injectEndpoints({
         };
       },
     }),
+    getAllUsers: builder.query({
+      query: () => {
+        return {
+          url: "/users",
+          method: "GET",
+        };
+      },
+      providesTags: ["user"],
+    }),
     updateProfile: builder.mutation({
       query: (data) => {
         return {
@@ -19,7 +28,31 @@ const userApi = baseApi.injectEndpoints({
         };
       },
     }),
+    promoteUser: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/users/promote/${id}`,
+          method: "PUT",
+        };
+      },
+      invalidatesTags: ["user"],
+    }),
+    removeUser: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/users/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["user"],
+    }),
   }),
 });
 
-export const { useGetProfileQuery, useUpdateProfileMutation } = userApi;
+export const {
+  useGetProfileQuery,
+  useUpdateProfileMutation,
+  useRemoveUserMutation,
+  useGetAllUsersQuery,
+  usePromoteUserMutation,
+} = userApi;
