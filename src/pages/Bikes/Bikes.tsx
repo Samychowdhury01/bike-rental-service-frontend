@@ -12,7 +12,7 @@ const Bikes = () => {
   const [clear, setClear] = useState(false);
   const { data, isLoading } = useGetAllBikesQuery(query);
   const  user = useDecodeToken()
-  console.log(user);
+  console.log(query);
  
   const handleClear = () => {
     setQuery({});
@@ -52,16 +52,9 @@ const Bikes = () => {
             data?.data.map((item: any) => (
               <BikeCard
                 key={item._id}
-                name={item.name}
-                brand={item.brand}
-                description={item.description}
-                cc={item.cc}
-                model={item.model}
-                year={item.year}
-                pricePerHour={item.pricePerHour}
-                img={item.image}
+                item = {item}
                 role={user && user.role}
-                id={item._id}
+                
               />
             ))
           )}

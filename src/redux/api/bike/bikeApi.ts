@@ -55,4 +55,5 @@ export const {
   useGetAllBikesQuery,
   useAddBikeMutation,
   useUpdateBikeMutation,
+  useDeleteBikeMutation
 } = bikeApi;
