@@ -1,9 +1,10 @@
-import BikeCard from "./BikeCard";
+
 import img from "@/assets/header.png";
 import test from "@/assets/test.png";
 import { Button } from "../ui/button";
 import SectionHeading from "../ui/SectionHeading";
 import { useGetAllBikesQuery } from "@/redux/api/bike/bikeApi";
+import BikeCard from "../ui/BikeCard";
 
 const Featured = () => {
   const {data, error, isLoading} = useGetAllBikesQuery('')

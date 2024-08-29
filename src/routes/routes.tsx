@@ -7,6 +7,7 @@ import { createBrowserRouter } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
 import DashboardLayout from "@/components/layouts/DashboardLayout";
 import Profile from "@/pages/Profile/Profile";
+import Bikes from "@/pages/Bikes/Bikes";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <Profile/>,
+      },
+      {
+        path: "/dashboard/bikes",
+        element: <Bikes/>,
       },
     ],
   },

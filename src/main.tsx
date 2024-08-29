@@ -11,9 +11,9 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <Provider store={store}>
       <CookiesProvider>
-        <PersistGate loading={null} persistor={persistor}>
+        {/* <PersistGate loading={null} persistor={persistor}> */}
           <RouterProvider router={router} />
-        </PersistGate>
+        {/* </PersistGate> */}
       </CookiesProvider>
     </Provider>
   </StrictMode>

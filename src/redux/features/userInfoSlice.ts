@@ -5,7 +5,7 @@ type TUser = {
   exp?: number;
   iat?: number;
   username?: string;
-  userRole?: string;
+  role?: string;
 };
 type TUserState = {
   user: TUser ;

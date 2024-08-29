@@ -1,7 +1,8 @@
-import { useAppSelector } from "@/redux/hook";
+
+import useDecodeToken from "./useDecodeToken";
 
 const useIsUserExist = () => {
-  const user = useAppSelector((state) => state.userInfo.user);
+  const user = useDecodeToken()
   return Boolean(Object.keys(user).length);
 };
 

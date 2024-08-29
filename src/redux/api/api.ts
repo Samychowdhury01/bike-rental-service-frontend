@@ -1,13 +1,15 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { selectToken } from "../features/tokenSlice";
+
+import { Cookies } from "react-cookie";
 
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_BASE_API,
-    prepareHeaders: (headers, { getState }) => {
+    prepareHeaders: (headers) => {
       // Retrieve the token using your custom hook
-      const token = selectToken(getState());
+      const cookies = new Cookies();
+      const token = cookies.get("token");
 
       // Set headers
       headers.set("Content-Type", "application/json");

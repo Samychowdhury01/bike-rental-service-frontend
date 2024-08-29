@@ -3,10 +3,17 @@ import { baseApi } from "../api";
 const bikeApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllBikes: builder.query({
-      query: () => {
+      query: (query) => {
+        const params = new URLSearchParams()
+        if(query){
+          Object.keys(query).forEach(key => {
+            params.append(key, query[key])
+            })
+        }
         return {
           url: "/bikes",
           method: "GET",
+          params: params
         };
       },
       providesTags: ["bike"],
