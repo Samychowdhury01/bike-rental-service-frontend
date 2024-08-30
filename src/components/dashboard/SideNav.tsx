@@ -1,26 +1,25 @@
-import { useAppSelector } from "@/redux/hook";
 import SideActiveLink from "./SideActiveLink";
 import useDecodeToken from "@/hooks/useDecodeToken";
 
 const SideNav = () => {
-  const user = useDecodeToken()
+  const user = useDecodeToken();
   const userNavItem = (
     <>
       <li>
-        <SideActiveLink to="/dashboard">Profile</SideActiveLink>
+        <SideActiveLink to="/dashboard/profile">Profile</SideActiveLink>
       </li>
       <li>
         <SideActiveLink to="/dashboard/bikes">Bikes</SideActiveLink>
       </li>
       <li>
-        <SideActiveLink to="/dashboard/my-rentals">My Rentals</SideActiveLink>
+        <SideActiveLink to="/dashboard/rentals">My Rentals</SideActiveLink>
       </li>
     </>
   );
   const adminNavItem = (
     <>
       <li>
-        <SideActiveLink to="/dashboard">Profile</SideActiveLink>
+        <SideActiveLink to="/dashboard/profile">Profile</SideActiveLink>
       </li>
       <li>
         <SideActiveLink to="/dashboard/bikes">Bikes</SideActiveLink>

@@ -9,6 +9,7 @@ const userApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
+      providesTags: ['user']
     }),
     getAllUsers: builder.query({
       query: () => {

@@ -9,7 +9,7 @@ const Welcome = () => {
     month: "long",
     year: "numeric",
   });
-  const name = capitalizeFirstLetter(user.username as string);
+  const name = user && capitalizeFirstLetter(user.username as string);
 
   return (
     <div className="bg-muted flex justify-between p-5 rounded-md shadow-lg shadow-secondary">

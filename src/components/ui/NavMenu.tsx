@@ -9,13 +9,16 @@ import useIsUserExist from "@/hooks/useIsUserExist";
 const NavMenu = () => {
   const isUserExist = useIsUserExist();
   const [isOpen, setIsOpen] = useState(false);
-  const [ , , removeCookie] = useCookies(["token"]);
+  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    removeCookie("token", { path: '/' });
+  const handleLogout = async () => {
+   const removedCookie = await removeCookie("token", {
+      path: "/",
+    });
     navigate("/");
   };
+
   const items = (
     <>
       <li>

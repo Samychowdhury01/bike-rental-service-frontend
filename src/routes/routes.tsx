@@ -14,6 +14,7 @@ import Rental from "@/pages/Rental/Rental";
 import BikeDetails from "@/pages/BikeDetails/BikeDetails";
 import SuccessPayment from "@/pages/SuccessPayment/SuccessPayment";
 import FailedPayment from "@/pages/FailedPayment/FailedPayment";
+import Welcome from "@/components/ui/Welcome";
 
 
 const router = createBrowserRouter([
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/dashboard",
+        element: <Welcome />,
+      },
+      {
+        path: "/dashboard/profile",
         element: <Profile />,
       },
       {

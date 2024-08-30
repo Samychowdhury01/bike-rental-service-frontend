@@ -10,12 +10,12 @@ const BikeDetailsContainer = ({ data }) => {
     bikeId: data._id,
     isUserExist,
     userId: user.userId,
-    isAvailable : data.isAvailable
+    isAvailable: data.isAvailable,
   };
   return (
     <div className="flex items-center justify-around mt-10">
-      <div>
-        <img src={data?.image} alt="" />
+      <div className="w-[500px]">
+        <img src={data?.image} alt="" className="object-cover w-full h-full" />
       </div>
       <div>
         <h3 className="text-2xl font-semibold mb-5">Bike Details:</h3>
@@ -58,7 +58,7 @@ const BikeDetailsContainer = ({ data }) => {
         )}
         {!data.isAvailable && (
           <p className="text-red-500 font-semibold mt-5">
-           This bike is not Available for rent 
+            This bike is not Available for rent
           </p>
         )}
       </div>

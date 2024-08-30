@@ -2,9 +2,16 @@ import { baseApi } from "../api";
 
 const bookingApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getBooking: builder.query({
+    getAllBooking: builder.query({
       query: () => ({
-        url: "/rentals",
+        url: "/rentals/all",
+        method: "GET",
+      }),
+      providesTags: ["booking"],
+    }),
+    getMyBooking: builder.query({
+      query: () => ({
+        url: `/rentals`,
         method: "GET",
       }),
       providesTags: ["booking"],
@@ -17,17 +24,11 @@ const bookingApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["booking"],
     }),
-    payment: builder.mutation({
-      query: () => ({
-        url: "/rentals/payment",
-        method: "POST",
-      }),
-      invalidatesTags: ["booking"],
-    }),
+ 
     updateBooking: builder.mutation({
       query: (id) => ({
-        url: `/${id}/return`,
-        method: "POST",
+        url: `/rentals/${id}/return`,
+        method: "PUT",
       }),
       invalidatesTags: ["booking"],
     }),
@@ -35,8 +36,9 @@ const bookingApi = baseApi.injectEndpoints({
 });
 
 export const {
-  useGetBookingQuery,
+  useGetAllBookingQuery,
   useAddBookingMutation,
   useUpdateBookingMutation,
-  usePaymentMutation,
+  useGetMyBookingQuery
+
 } = bookingApi;

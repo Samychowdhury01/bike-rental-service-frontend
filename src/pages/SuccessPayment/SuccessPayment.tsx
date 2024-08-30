@@ -7,14 +7,14 @@ import { Button } from "@/components/ui/button";
 const SuccessPayment = () => {
   const navigate = useNavigate();
 
-    useEffect(() => {
-      const referrer = document.referrer;
-      const expectedReferrer = "https://sandbox.aamarpay.com/payment_page.php";
+    // useEffect(() => {
+    //   const referrer = document.referrer;
+    //   const expectedReferrer = "https://sandbox.aamarpay.com/payment_page.php";
 
-      if (referrer !== expectedReferrer) {
-        navigate("/"); // Redirect to home if the referrer doesn't match
-      }
-    }, [navigate]);
+    //   if (referrer !== expectedReferrer) {
+    //     navigate("/"); // Redirect to home if the referrer doesn't match
+    //   }
+    // }, [navigate]);
 
   // Render the component if the referrer is valid
   return (
@@ -27,7 +27,7 @@ const SuccessPayment = () => {
           <h2 className="text-2xl font-semibold">Congratulations!!</h2>
           <p>Your booking is Confirmed.</p>
           <Button>
-            <Link to="/">Back to Home</Link>
+            <Link to="/dashboard">Back to Dashboard</Link>
           </Button>
         </div>
 

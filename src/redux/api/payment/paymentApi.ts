@@ -9,9 +9,14 @@ const paymentApi = baseApi.injectEndpoints({
         body: data,
       }),
     }),
+    makePayment: builder.mutation({
+      query: (data) => ({
+        url: "/payment",
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const {
-  useAdvancePaymentMutation,
-} = paymentApi;
+export const { useAdvancePaymentMutation, useMakePaymentMutation } = paymentApi;

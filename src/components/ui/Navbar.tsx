@@ -1,11 +1,8 @@
-
 import NavMenu from "./NavMenu";
 
-
 const Navbar = () => {
-  // const {user} = useAppSelector((state) => state.userInfo);
   return (
-    // Main Div 
+    // Main Div
     <div className="flex md:items-center justify-between mb-10 p-2">
       {/* logo */}
       <div>

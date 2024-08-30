@@ -20,8 +20,10 @@ const UserInfo = () => {
   } = useForm();
   const [toggle, setToggle] = useState(true);
   const { data } = useGetProfileQuery("");
+  console.log(data);
   //   const { name, phone, address, email } = data?.data;
   const [updateProfile] = useUpdateProfileMutation();
+  
   const onSubmit = async (data) => {
     const response = await updateProfile(data);
     if (response.data) {
