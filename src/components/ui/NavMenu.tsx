@@ -5,19 +5,15 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { useState } from "react";
 import useIsUserExist from "@/hooks/useIsUserExist";
-import { addUserInfo } from "@/redux/features/userInfoSlice";
-import { useAppDispatch } from "@/redux/hook";
 
 const NavMenu = () => {
   const isUserExist = useIsUserExist();
   const [isOpen, setIsOpen] = useState(false);
-  const [, , removeCookie] = useCookies(["token"]);
-  const dispatch = useAppDispatch();
+  const [ , , removeCookie] = useCookies(["token"]);
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    removeCookie("token");
-    dispatch(addUserInfo({})); // Clear user info from Redux store
+    removeCookie("token", { path: '/' });
     navigate("/");
   };
   const items = (

@@ -9,7 +9,12 @@ import DashboardLayout from "@/components/layouts/DashboardLayout";
 import Profile from "@/pages/Profile/Profile";
 import Bikes from "@/pages/Bikes/Bikes";
 import User from "@/pages/User/User";
-import Coupon from "@/pages/Coupon/Coupon";
+import CouponPage from "@/pages/Coupon/CouponPage";
+import Rental from "@/pages/Rental/Rental";
+import BikeDetails from "@/pages/BikeDetails/BikeDetails";
+import SuccessPayment from "@/pages/SuccessPayment/SuccessPayment";
+import FailedPayment from "@/pages/FailedPayment/FailedPayment";
+
 
 const router = createBrowserRouter([
   {
@@ -32,6 +37,18 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      {
+        path: "/details/:id",
+        element: <BikeDetails />,
+      },
+      {
+        path: "/checkout-success",
+        element: <SuccessPayment />,
+      },
+      {
+        path: "/checkout-fail",
+        element: <FailedPayment />,
+      },
     ],
   },
   {
@@ -40,22 +57,27 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/dashboard",
-        element: <Profile/>,
+        element: <Profile />,
       },
       {
         path: "/dashboard/bikes",
-        element: <Bikes/>,
+        element: <Bikes />,
       },
       {
         path: "/dashboard/users",
-        element: <User/>,
+        element: <User />,
       },
       {
         path: "/dashboard/coupons",
-        element: <Coupon/>,
+        element: <CouponPage />,
+      },
+      {
+        path: "/dashboard/rentals",
+        element: <Rental />,
       },
     ],
   },
+ 
 ]);
 
 export default router;

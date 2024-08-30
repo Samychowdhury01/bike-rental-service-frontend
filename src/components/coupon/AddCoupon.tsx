@@ -31,6 +31,7 @@ const AddCoupon = () => {
           title: "Coupon Added Successfully",
           icon: "success",
         });
+        reset()
         setOpen(false);
       } else {
         Swal.fire({

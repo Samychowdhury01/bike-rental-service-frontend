@@ -9,14 +9,14 @@ const WheelComponent = () => {
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
-  const [prizeValue, setPrizeValue] = useState("");
+  const [prizeValue, setPrizeValue] = useState(0);
   const [couponCode, setCouponCode] = useState("");
 
   const data = [
-    { option: "10", coupon: "getYour10" },
-    { option: "20", coupon: "abc123xyz" },
-    { option: "30", coupon: "promo30off" },
-    { option: "50", coupon: "save50now" },
+    { option: 10, coupon: "getYour10" },
+    { option: 20, coupon: "abc123xyz" },
+    { option: 30, coupon: "promo30off" },
+    { option: 50, coupon: "save50now" },
   ];
 
   const backgroundColors = ["#0D47A1", "#70bbe0", "#42A5F5", "#BBDEFB"];

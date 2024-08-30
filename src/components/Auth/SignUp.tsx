@@ -31,7 +31,7 @@ const SignUp = ({ setActiveTab }) => {
       Swal.fire({
         icon: "success",
         title: "Success",
-        text: data,
+        text: response.data.message,
       });
       setActiveTab("login");
     } else {

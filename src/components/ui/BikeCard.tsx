@@ -10,10 +10,11 @@ import {
   CardTitle,
 } from "../ui/card";
 import { useDeleteBikeMutation } from "@/redux/api/bike/bikeApi";
+import { Link, Navigate } from "react-router-dom";
 
-const BikeCard = ({ role, item }: {role: string, item: any}) => {
+const BikeCard = ({ role, item }: { role: string; item: any }) => {
   const [deleteBike] = useDeleteBikeMutation();
-  const handleDelete = (id : string) => {
+  const handleDelete = (id: string) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -92,7 +93,9 @@ const BikeCard = ({ role, item }: {role: string, item: any}) => {
               </Button>
             </div>
           ) : (
-            <Button>View Details</Button>
+            <Button>
+              <Link to={`/details/${item._id}`}>View Details</Link>
+            </Button>
           )}
         </CardFooter>
       </Card>

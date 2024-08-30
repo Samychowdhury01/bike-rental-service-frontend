@@ -12,7 +12,7 @@ const Bikes = () => {
   const [clear, setClear] = useState(false);
   const { data, isLoading } = useGetAllBikesQuery(query);
   const  user = useDecodeToken()
-
+console.log(user);
  
   const handleClear = () => {
     setQuery({});

@@ -4,16 +4,25 @@ const bikeApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllBikes: builder.query({
       query: (query) => {
-        const params = new URLSearchParams()
-        if(query){
-          Object.keys(query).forEach(key => {
-            params.append(key, query[key])
-            })
+        const params = new URLSearchParams();
+        if (query) {
+          Object.keys(query).forEach((key) => {
+            params.append(key, query[key]);
+          });
         }
         return {
           url: "/bikes",
           method: "GET",
-          params: params
+          params: params,
+        };
+      },
+      providesTags: ["bike"],
+    }),
+    getSingleBike: builder.query({
+      query: (id) => {
+        return {
+          url: `/bikes/${id}`,
+          method: "GET",
         };
       },
       providesTags: ["bike"],
@@ -30,7 +39,7 @@ const bikeApi = baseApi.injectEndpoints({
     }),
     updateBike: builder.mutation({
       query: (payload) => {
-        const {id, ...data} = payload
+        const { id, ...data } = payload;
         return {
           url: `/bikes/${id}`,
           method: "PUT",
@@ -55,5 +64,6 @@ export const {
   useGetAllBikesQuery,
   useAddBikeMutation,
   useUpdateBikeMutation,
-  useDeleteBikeMutation
+  useDeleteBikeMutation,
+  useGetSingleBikeQuery
 } = bikeApi;

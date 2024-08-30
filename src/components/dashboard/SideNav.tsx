@@ -1,8 +1,9 @@
 import { useAppSelector } from "@/redux/hook";
 import SideActiveLink from "./SideActiveLink";
+import useDecodeToken from "@/hooks/useDecodeToken";
 
 const SideNav = () => {
-  const { user } = useAppSelector((state) => state.userInfo);
+  const user = useDecodeToken()
   const userNavItem = (
     <>
       <li>
@@ -35,6 +36,7 @@ const SideNav = () => {
       </li>
     </>
   );
+
   return (
     <div className="bg-secondary p-5 rounded-md h-full">
       <ul className="space-y-5">
