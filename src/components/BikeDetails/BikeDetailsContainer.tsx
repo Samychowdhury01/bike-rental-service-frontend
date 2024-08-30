@@ -1,11 +1,12 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import BookNow from "./BookNow";
 import useIsUserExist from "@/hooks/useIsUserExist";
 import useDecodeToken from "@/hooks/useDecodeToken";
 
 const BikeDetailsContainer = ({ data }) => {
   const isUserExist = useIsUserExist();
-  const user = useDecodeToken();
+  const user : any = useDecodeToken();
   const bookingInfo = {
     bikeId: data._id,
     isUserExist,

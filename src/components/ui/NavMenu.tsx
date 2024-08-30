@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import ActiveLink from "./ActiveLink";
 import { Button } from "./button";
 import { HiMenuAlt1, HiX } from "react-icons/hi";
@@ -9,10 +11,12 @@ import useIsUserExist from "@/hooks/useIsUserExist";
 const NavMenu = () => {
   const isUserExist = useIsUserExist();
   const [isOpen, setIsOpen] = useState(false);
+  // @ts-ignore
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
   const navigate = useNavigate();
 
   const handleLogout = async () => {
+    // @ts-ignore
    const removedCookie = await removeCookie("token", {
       path: "/",
     });

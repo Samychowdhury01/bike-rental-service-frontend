@@ -1,15 +1,24 @@
-
-import img from "@/assets/header.png";
-import test from "@/assets/test.png";
 import { Button } from "../ui/button";
 import SectionHeading from "../ui/SectionHeading";
 import { useGetAllBikesQuery } from "@/redux/api/bike/bikeApi";
-import BikeCard from "../ui/BikeCard";
+
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../ui/card";
+import { Link } from "react-router-dom";
 
 const Featured = () => {
-  const {data, error, isLoading} = useGetAllBikesQuery('')
-  const bikes = data?.data
-console.log(bikes);
+  const { data, } = useGetAllBikesQuery("");
+  let bikes;
+
+  if (data.data) {
+    bikes = data.data.filter((bike) => bike.isAvailable);
+  }
+
   return (
     <div className="space-y-5 mt-16 p-5 md:p-9">
       {/* heading */}
@@ -19,25 +28,40 @@ console.log(bikes);
           best rides for every adventure. Whether you're cruising through the
           city or hitting the trails, find the perfect bike to match your style
           and performance needs."
-          width=" w-1/4"
+        width=" w-1/4"
       />
       {/* cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        <BikeCard img={img} />
-
-        <BikeCard img={test} />
-        <BikeCard img={img} />
-
-        <BikeCard img={test} />
-        <BikeCard img={img} />
-
-        <BikeCard img={test} />
-        <BikeCard img={img} />
-
-        <BikeCard img={test} />
+        {bikes?.map((bike) => (
+          <Card>
+            <CardHeader>
+              <div className="md:h-[250px] w-full mb-2">
+                <img
+                  src={bike.image}
+                  alt=""
+                  className="object-fill h-full w-full rounded-md shadow-md"
+                />
+              </div>
+              <CardTitle>{bike.name}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p>
+                <span className="font-semibold mr-1">Description:</span>
+                {bike.description}
+              </p>
+            </CardContent>
+            <CardFooter>
+              <Button>
+                <Link to={`/details/${bike._id}`}>View Details</Link>
+              </Button>
+            </CardFooter>
+          </Card>
+        ))}
       </div>
       <div className="text-center">
-        <Button>View All</Button>
+        <Button>
+          <Link to="dashboard/bikes">View All Bikes</Link>
+        </Button>
       </div>
     </div>
   );

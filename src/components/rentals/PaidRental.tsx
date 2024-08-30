@@ -1,9 +1,4 @@
 import {
-  useGetAllBookingQuery,
-  useUpdateBookingMutation,
-} from "@/redux/api/booking/bookingApi";
-import Spinner from "../ui/Spinner";
-import {
   Table,
   TableBody,
   TableCell,
@@ -11,17 +6,18 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "../ui/button";
 import { formatDate } from "@/utils/formatDate";
+import Spinner from "../ui/Spinner";
 
-const PaidRental = ({ paidRental }) => {
+const PaidRental = ({ paidRental, loading }) => {
   if (!paidRental.length) {
     return (
-      <p className="text-red-500 flex items-center justify-center mt-5">
-        No paid rentals found!
-      </p>
+      <div className="text-red-500 flex items-center justify-center">
+        {loading ? <Spinner /> : <p>No user rentals found!</p>}
+      </div>
     );
   }
+
   return (
     <>
       <div>

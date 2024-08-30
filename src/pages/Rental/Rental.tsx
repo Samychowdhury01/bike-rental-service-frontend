@@ -1,3 +1,4 @@
+
 import RentalsContainer from "@/components/rentals/RentalsContainer";
 import SectionHeading from "@/components/ui/SectionHeading";
 

@@ -1,7 +1,3 @@
-import {
-  useGetAllBookingQuery,
-  useUpdateBookingMutation,
-} from "@/redux/api/booking/bookingApi";
 import Spinner from "../ui/Spinner";
 import {
   Table,

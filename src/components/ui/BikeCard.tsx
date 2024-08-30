@@ -10,7 +10,7 @@ import {
   CardTitle,
 } from "../ui/card";
 import { useDeleteBikeMutation } from "@/redux/api/bike/bikeApi";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const BikeCard = ({ role, item }: { role: string; item: any }) => {
   const [deleteBike] = useDeleteBikeMutation();

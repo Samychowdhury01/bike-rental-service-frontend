@@ -11,7 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { MdAdd } from "react-icons/md";
-import { useForm, FieldErrors, FieldValues } from "react-hook-form";
+import { useForm, } from "react-hook-form";
 import Swal from "sweetalert2";
 import { useAddBikeMutation } from "@/redux/api/bike/bikeApi";
 import { useState } from "react";
@@ -24,10 +24,9 @@ const AddBike = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
     reset,
   } = useForm();
-  const typedErrors = errors as FieldErrors<FieldValues>;
+
 
   const onSubmit = async (data) => {
     const { name, description, brand, model, pricePerHour, cc, year } = data;

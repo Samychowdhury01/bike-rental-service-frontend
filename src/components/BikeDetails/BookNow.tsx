@@ -16,7 +16,7 @@ import { useAdvancePaymentMutation } from "@/redux/api/payment/paymentApi";
 
 const BookNow = ({ bookingInfo }) => {
   const [open, setOpen] = useState(false);
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit } = useForm();
   const [advancePayment, {isLoading}] = useAdvancePaymentMutation();
 
   const onSubmit = async (data: Record<string, unknown>) => {
