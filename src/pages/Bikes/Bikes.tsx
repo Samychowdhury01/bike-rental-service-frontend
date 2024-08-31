@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import BikeCard from "@/components/ui/BikeCard";
 import { useGetAllBikesQuery } from "@/redux/api/bike/bikeApi";
@@ -11,7 +12,7 @@ const Bikes = () => {
   const [query, setQuery] = useState({});
   const [clear, setClear] = useState(false);
   const { data, isLoading } = useGetAllBikesQuery(query);
-  const  user = useDecodeToken()
+  const  user : any = useDecodeToken()
 console.log(user);
  
   const handleClear = () => {

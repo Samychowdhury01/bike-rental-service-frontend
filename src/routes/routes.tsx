@@ -15,7 +15,7 @@ import BikeDetails from "@/pages/BikeDetails/BikeDetails";
 import SuccessPayment from "@/pages/SuccessPayment/SuccessPayment";
 import FailedPayment from "@/pages/FailedPayment/FailedPayment";
 import Welcome from "@/components/ui/Welcome";
-
+import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -32,11 +32,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/auth",
-        element: (
-          <PrivateRoute>
-            <Auth />
-          </PrivateRoute>
-        ),
+        element: <Auth />,
       },
       {
         path: "/details/:id",
@@ -54,7 +50,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashboardLayout />,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "/dashboard",
@@ -62,27 +62,46 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/profile",
-        element: <Profile />,
+        element: (
+          <PrivateRoute>
+            <Profile />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/bikes",
-        element: <Bikes />,
+        element: (
+          <PrivateRoute>
+            <Bikes />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/users",
-        element: <User />,
+        element: (
+          <AdminRoute>
+            <User />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/coupons",
-        element: <CouponPage />,
+        element: (
+          <AdminRoute>
+            <CouponPage />
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/rentals",
-        element: <Rental />,
+        element: (
+          <PrivateRoute>
+            <Rental />
+          </PrivateRoute>
+        ),
       },
     ],
   },
- 
 ]);
 
 export default router;

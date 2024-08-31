@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   useGetProfileQuery,
   useUpdateProfileMutation,
@@ -10,13 +11,13 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { Button } from "../ui/button";
 import Swal from "sweetalert2";
+import { getErrorData } from "@/utils/getErrorData";
 
 const UserInfo = () => {
   // react-form-hook
   const {
     register,
     handleSubmit,
-    formState: { errors },
   } = useForm();
   const [toggle, setToggle] = useState(true);
   const { data } = useGetProfileQuery("");
@@ -24,20 +25,31 @@ const UserInfo = () => {
   //   const { name, phone, address, email } = data?.data;
   const [updateProfile] = useUpdateProfileMutation();
   
-  const onSubmit = async (data) => {
-    const response = await updateProfile(data);
-    if (response.data) {
+  const onSubmit = async (data: any) => {
+    try {
+      const response = await updateProfile(data);
+  
+      if (response.data) {
+        Swal.fire({
+          title: "Success",
+          text: "Profile updated successfully",
+          icon: "success",
+        });
+        setToggle(prevToggle => !prevToggle); // Toggle state
+      } else {
+        const errorData = getErrorData(response.error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: errorData?.message || "An error occurred while updating the profile",
+        });
+      }
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : "Something went wrong, try again!";
       Swal.fire({
-        title: "Success",
-        text: "Profile updated successfully",
-        icon: "success",
-      });
-      setToggle(!toggle);
-    } else {
-       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: response?.error?.data.message,
+        text: errorMessage,
       });
     }
   };

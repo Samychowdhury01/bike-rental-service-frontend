@@ -16,6 +16,7 @@ import Swal from "sweetalert2";
 import { useState } from "react";
 import Spinner from "../ui/Spinner";
 import { useAddCouponMutation } from "@/redux/api/coupon/couponApi";
+import { getErrorData } from "@/utils/getErrorData";
 
 const AddCoupon = () => {
   const [open, setOpen] = useState(false);
@@ -23,28 +24,31 @@ const AddCoupon = () => {
   const [addCoupon, { isLoading }] = useAddCouponMutation();
   const { register, handleSubmit, reset } = useForm();
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: any) => {
     try {
       const response = await addCoupon(data);
+  
       if (response.data) {
         Swal.fire({
           title: "Coupon Added Successfully",
           icon: "success",
         });
-        reset()
-        setOpen(false);
+        reset(); // Reset form after successful submission
+        setOpen(false); // Close modal or dialog
       } else {
+        const errorData = getErrorData(response.error);
         Swal.fire({
           title: "Error",
           icon: "error",
-          text: response.error.data.message || "something went wrong!",
+          text: errorData?.message || "Something went wrong!",
         });
       }
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : "Something went wrong, try again!";
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: error.message || "something went wrong try again!!",
+        text: errorMessage,
       });
     }
   };

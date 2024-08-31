@@ -1,7 +1,5 @@
 import SectionHeading from "@/components/ui/SectionHeading";
 import { useParams } from "react-router-dom";
-import img from "@/assets/test.png";
-import { Button } from "@/components/ui/button";
 import { useGetSingleBikeQuery } from "@/redux/api/bike/bikeApi";
 import BikeDetailsContainer from "@/components/BikeDetails/BikeDetailsContainer";
 

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -16,19 +18,16 @@ import { useLoginMutation } from "@/redux/api/auth/authApi";
 import Spinner from "../ui/Spinner";
 import { useState } from "react";
 import { useCookies } from "react-cookie";
-import { useAppDispatch } from "@/redux/hook";
 import { jwtDecode } from "jwt-decode";
-import { addUserInfo } from "@/redux/features/userInfoSlice";
 import {  useNavigate } from "react-router-dom";
-import { setToken } from "@/redux/features/tokenSlice";
+import { getErrorData } from "@/utils/getErrorData";
 
 const Login = () => {
   // location path
   const navigate = useNavigate();
   // redux
   const [login, { isLoading }] = useLoginMutation();
-  // dispatch function
-  const dispatch = useAppDispatch();
+
 
   // react-form-hook
   const {
@@ -46,36 +45,36 @@ const Login = () => {
   const [, setCookie] = useCookies(["token"]);
 
   // onSubmit handler
-  const onSubmit = async (data) => {
-    setErrorMessage("");
+  const onSubmit = async (data: any) => {
+    setErrorMessage(""); // Clear any previous error messages
+  
     try {
       const response = await login(data);
-
+  
       if (response.data && response.data.token) {
         // Store the token directly from the response
         const token = response.data.token;
-
+  
         // Set the cookie with the token
         setCookie("token", token);
-
-        // Decode the token directly from the response
-        const decoded = jwtDecode(token);
-        // setting the data in state
-        dispatch(addUserInfo(decoded));
-        // setting the token in state
-        dispatch(setToken(token));
-
+  
+        // Decode the token
+        // @ts-ignore
+        const decoded = jwtDecode<any>(token); // Ensure proper type for the decoded token if needed
+  
         Swal.fire({
           icon: "success",
           title: "Success",
-          text: response.data.message,
+          text: response.data.message || "Login successful!",
         });
-
-        navigate("/dashboard");
-        setErrorMessage("");
+  
+        navigate("/dashboard"); // Redirect to dashboard
+        setErrorMessage(""); // Clear any error messages
       } else {
-        setErrorMessage(response.error.data.message);
-        reset();
+        // Use getErrorData to extract detailed error information
+        const errorData = getErrorData(response.error);
+        setErrorMessage(errorData?.message || "Login failed. Please check your credentials.");
+        reset(); // Reset form fields
       }
     } catch (error) {
       console.error("Error during login:", error);

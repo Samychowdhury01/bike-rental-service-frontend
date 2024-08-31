@@ -11,22 +11,19 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { MdAdd } from "react-icons/md";
-import { useForm, } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { useAddBikeMutation } from "@/redux/api/bike/bikeApi";
 import { useState } from "react";
 import Spinner from "../ui/Spinner";
+import { getErrorData } from "@/utils/getErrorData";
+import { isError } from "@/utils/typeGaurd";
 
 const AddBike = () => {
   const [open, setOpen] = useState(false);
 
   const [addBike, { isLoading }] = useAddBikeMutation();
-  const {
-    register,
-    handleSubmit,
-    reset,
-  } = useForm();
-
+  const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = async (data) => {
     const { name, description, brand, model, pricePerHour, cc, year } = data;
@@ -64,8 +61,9 @@ const AddBike = () => {
         year: Number(year),
         image: imageUrl, // Add the image URL to the bike data
       };
-      console.log(bikeData);
+
       const response = await addBike(bikeData);
+
       if (response.data) {
         Swal.fire({
           title: "Bike Added Successfully",
@@ -75,21 +73,30 @@ const AddBike = () => {
         setOpen(false);
         reset(); // Reset form after successful submission
       } else {
+        const errorData = getErrorData(response.error); // Use getErrorData here
+
         Swal.fire({
           title: "Error",
-          text: response?.error?.data.message ||"Failed to add bike",
+          text: errorData?.message || "Failed to add bike",
           icon: "error",
         });
       }
     } catch (error) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: error.message || "something went wrong try again!!",
-      });
+      if (isError(error)) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.message || "Something went wrong, try again!",
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong, try again!",
+        });
+      }
     }
   };
-
   return (
     <>
       <Dialog open={open} onOpenChange={setOpen}>
@@ -200,14 +207,13 @@ const AddBike = () => {
             </div>
           </div>
           <DialogFooter>
-            {
-              isLoading? <Spinner/> : (
-                <Button type="submit" onClick={handleSubmit(onSubmit)}>
-              Submit
-            </Button>
-              )
-            }
-            
+            {isLoading ? (
+              <Spinner />
+            ) : (
+              <Button type="submit" onClick={handleSubmit(onSubmit)}>
+                Submit
+              </Button>
+            )}
           </DialogFooter>
         </DialogContent>
       </Dialog>

@@ -1,50 +1,83 @@
-# React + TypeScript + Vite
+# RideWave - A Bike Rental Service
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+RideWave offers a seamless and convenient way to rent bikes, empowering users to explore with ease. With a user-friendly interface and a wide range of bikes, RideWave is your go-to platform for flexible and affordable bike rentals. Whether you're commuting or enjoying a weekend ride, RideWave ensures a smooth and enjoyable experience every time.
 
-Currently, two official plugins are available:
+## Technology stack and package
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. TypeScript
+2. React
+3. Tailwind CSS
+4. Shadcn
+5. Rect Cookie
+6. React form hook
+7. React icons
+8. React-rating
 
-## Expanding the ESLint configuration
+### Prerequisites
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Before running this project locally, ensure you have installed following:
 
-- Configure the top-level `parserOptions` property like this:
+- Node.js
+- npm
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### Installation
+
+First, clone the repo :
+
+```
+git clone https://github.com/Samychowdhury01/bike-rental-service-frontend.git
+
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Second, Navigate to the project directory:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
 ```
+cd bike-rental-service-frontend
+
+```
+
+Now Install dependencies:
+
+```
+npm install
+
+```
+
+## How to Run the Application
+
+To run the application locally, you need to follow these steps:
+
+**there are two run script :**
+
+1. **For Development:** Run application in production mode.
+
+```
+npm run dev
+
+```
+
+### Other Scripts:
+
+- **Build the project:** Builds the application. (it will convert ts file to js)
+
+```
+npm run build
+
+```
+
+- **Check Errors using EsLint:** Lints the TypeScript files using ESLint.
+
+```
+npm run lint
+
+```
+
+
+
+# Additional Information
+
+Keep in mind that you need to create an `.env.local` file. And you have to provide `VITE_BASE_API`, and your `VITE_Image_Upload_token` in your `.env.local` file.
+
+# Live Link
+
+[click here](https://bike-rental-service-ctg.netlify.app/)

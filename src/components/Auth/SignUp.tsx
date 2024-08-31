@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -13,6 +14,7 @@ import { FieldErrors, FieldValues, useForm } from "react-hook-form";
 import { useSignUpMutation } from "@/redux/api/auth/authApi";
 import Spinner from "../ui/Spinner";
 import Swal from "sweetalert2";
+import { getErrorData } from "@/utils/getErrorData";
 const SignUp = ({ setActiveTab }) => {
   const {
     register,
@@ -23,26 +25,40 @@ const SignUp = ({ setActiveTab }) => {
   const typedErrors = errors as FieldErrors<FieldValues>;
   // redux signup mutation
   const [signup, { isLoading }] = useSignUpMutation();
-  const onSubmit = async (data) => {
-    const userInfo = { ...data, role: "user" };
+
+
+ const onSubmit = async (data: any) => {
+  const userInfo = { ...data, role: "user" };
+
+  try {
     const response = await signup(userInfo);
 
     if (response.data) {
       Swal.fire({
         icon: "success",
         title: "Success",
-        text: response.data.message,
+        text: response.data.message || "Signup successful!",
       });
-      setActiveTab("login");
+      setActiveTab("login"); // Switch to the login tab
     } else {
+      // Use getErrorData to extract detailed error information
+      const errorData = getErrorData(response.error);
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: response?.error?.data.message,
+        text: errorData?.message || "Signup failed. Please try again.",
       });
-      reset();
+      reset(); // Reset form fields
     }
-  };
+  } catch (error) {
+    console.error("Error during signup:", error);
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "An unexpected error occurred. Please try again.",
+    });
+  }
+};
   return (
     <>
       <Card>

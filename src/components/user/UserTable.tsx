@@ -15,6 +15,7 @@ import {
 import { Button } from "../ui/button";
 import Spinner from "../ui/Spinner";
 import Swal from "sweetalert2";
+import { getErrorData } from "@/utils/getErrorData";
 
 const UserTable = () => {
   const { data, isLoading } = useGetAllUsersQuery("");
@@ -26,21 +27,33 @@ const UserTable = () => {
   // handle promote user
   const handlePromoteUser = async (id: string) => {
     setPromotingUserId(id);
-    const response = await promoteUser(id);
-
-    if (response.data) {
-      Swal.fire({
-        icon: "success",
-        title: "User promoted successfully",
-      });
-    } else {
+  
+    try {
+      const response = await promoteUser(id);
+  
+      if (response.data) {
+        Swal.fire({
+          icon: "success",
+          title: "User promoted successfully",
+        });
+      } else {
+        const errorData = getErrorData(response.error);
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: errorData?.message || "Something went wrong!",
+        });
+      }
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : "Something went wrong, try again!";
       Swal.fire({
         icon: "error",
-        title: response.error.data.message || "Something went wrong!",
+        title: "Oops...",
+        text: errorMessage,
       });
+    } finally {
+      setPromotingUserId(""); // Reset promoting state regardless of success or failure
     }
-
-    setPromotingUserId(""); // Reset promoting state
   };
   // handle promote user
   const handleDeleteUser = async (id: string) => {

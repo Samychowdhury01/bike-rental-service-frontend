@@ -13,10 +13,10 @@ const WheelComponent = () => {
   const [couponCode, setCouponCode] = useState("");
 
   const data = [
-    { option: 10, coupon: "getYour10" },
-    { option: 20, coupon: "abc123xyz" },
-    { option: 30, coupon: "promo30off" },
-    { option: 50, coupon: "save50now" },
+    { option: "10", coupon: "getYour10" },
+    { option: "20", coupon: "abc123xyz" },
+    { option: "30", coupon: "promo30off" },
+    { option: "10", coupon: "save50now" },
   ];
 
   const backgroundColors = ["#0D47A1", "#70bbe0", "#42A5F5", "#BBDEFB"];
@@ -45,7 +45,7 @@ const WheelComponent = () => {
 
   const onStopSpinning = () => {
     setMustSpin(false);
-    setPrizeValue(data[prizeNumber].option);
+    setPrizeValue(Number(data[prizeNumber].option));
     setCouponCode(data[prizeNumber].coupon);
     setModalVisible(true);
   };
@@ -102,21 +102,12 @@ const WheelComponent = () => {
               Congratulations!! You got {prizeValue}% discount
             </h2>
             <p className="mb-4">Use this coupon code to get your discount:</p>
-           <div className="flex items-center gap-4">
-           <Input
-              type="text"
-              defaultValue={couponCode}
-              readOnly
-              
-            />
-            <Button
-            variant="outline"
-              onClick={copyToClipboard}
-            >
-              <FaRegCopy />
-            </Button>
-           </div>
-
+            <div className="flex items-center gap-4">
+              <Input type="text" defaultValue={couponCode} readOnly />
+              <Button variant="outline" onClick={copyToClipboard}>
+                <FaRegCopy />
+              </Button>
+            </div>
           </div>
         </div>
       )}

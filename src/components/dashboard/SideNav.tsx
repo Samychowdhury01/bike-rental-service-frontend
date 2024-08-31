@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import SideActiveLink from "./SideActiveLink";
 import useDecodeToken from "@/hooks/useDecodeToken";
 
 const SideNav = () => {
-  const user = useDecodeToken();
+  const user : any = useDecodeToken();
   const userNavItem = (
     <>
       <li>

@@ -14,9 +14,9 @@ const BikeDetailsContainer = ({ data }) => {
     isAvailable: data.isAvailable,
   };
   return (
-    <div className="flex items-center justify-around mt-10">
-      <div className="w-[500px]">
-        <img src={data?.image} alt="" className="object-cover w-full h-full" />
+    <div className="flex flex-col md:flex-row items-center justify-around mt-10 space-y-5">
+      <div className="md:w-[400px]">
+        <img src={data?.image} alt="" className="object-contain w-full h-full" />
       </div>
       <div>
         <h3 className="text-2xl font-semibold mb-5">Bike Details:</h3>
@@ -52,16 +52,16 @@ const BikeDetailsContainer = ({ data }) => {
         <div>
           <BookNow bookingInfo={bookingInfo} />
         </div>
-        {!isUserExist && (
+        {!isUserExist && !data.isAvailable && (
           <p className="text-red-500 font-semibold mt-5">
             You need to login first to book the bike!
           </p>
         )}
-        {!data.isAvailable && (
+        {/* {!data.isAvailable && (
           <p className="text-red-500 font-semibold mt-5">
             This bike is not Available for rent
           </p>
-        )}
+        )} */}
       </div>
     </div>
   );

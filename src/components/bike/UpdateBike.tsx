@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
@@ -42,7 +43,9 @@ const onSubmit = async (data: any) => {
         cc: Number(cc),
         year: Number(year),
       };
-      const response = await updateBike(payload).unwrap(); // Use unwrap() to handle the response properly
+      
+      // @ts-ignore
+      const response = await updateBike(payload).unwrap(); 
   
       Swal.fire({
         title: "Bike updated successfully",

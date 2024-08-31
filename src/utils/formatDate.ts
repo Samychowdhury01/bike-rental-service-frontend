@@ -1,7 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+
 export const formatDate = (dateString) => {
     const date = new Date(dateString);
 
-    const options = {
+    const options : any = {
       year: "numeric",
       month: "long",
       day: "numeric",
