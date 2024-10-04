@@ -17,6 +17,7 @@ import FailedPayment from "@/pages/FailedPayment/FailedPayment";
 import Welcome from "@/components/ui/Welcome";
 import AdminRoute from "./AdminRoute";
 import ErrorPage from "@/pages/ErrorPage/ErrorPage";
+import MyProfile from "@/pages/MyProfile/MyProfile";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "/details/:id",
         element: <BikeDetails />,
+      },
+      {
+        path: "/my-profile",
+        element: <MyProfile />,
       },
       {
         path: "/checkout-success",

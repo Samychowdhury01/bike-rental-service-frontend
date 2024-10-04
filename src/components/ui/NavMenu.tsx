@@ -49,6 +49,9 @@ const NavMenu = () => {
         <ActiveLink to="/about">About Us</ActiveLink>
       </li>
       <li>
+        {isUserExist && <ActiveLink to="/my-profile">My Profile</ActiveLink>}
+      </li>
+      <li>
         {isUserExist && <ActiveLink to="/dashboard">Dashboard</ActiveLink>}
       </li>
       <li>

@@ -1,15 +1,14 @@
 import { ReactNode, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import useDecodeToken from "@/hooks/useDecodeToken";
 import useIsUserExist from "@/hooks/useIsUserExist";
 import Swal from "sweetalert2";
 
 const PrivateRoute = ({ children }: { children: ReactNode }) => {
   const isUserExist = useIsUserExist();
   const navigate = useNavigate();
-  const user = useDecodeToken();
 
   useEffect(() => {
+    // Always check if the user exists when the component mounts
     if (!isUserExist) {
       Swal.fire({
         title: "Error",
@@ -20,7 +19,7 @@ const PrivateRoute = ({ children }: { children: ReactNode }) => {
     }
   }, [isUserExist, navigate]);
 
-  // You can optionally return null if the user is not logged in to avoid rendering the children
+  // If the user is not authenticated, return null
   if (!isUserExist) return null;
 
   return children;

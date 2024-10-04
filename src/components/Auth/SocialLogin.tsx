@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
+
 import { AuthContext } from "@/Provider/AuthProvider";
 import { useGoogleAuthMutation } from "@/redux/api/auth/authApi";
 import { useContext } from "react";
