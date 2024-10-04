@@ -5,8 +5,10 @@ import { Button } from "./button";
 import { HiMenuAlt1, HiX } from "react-icons/hi";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import useIsUserExist from "@/hooks/useIsUserExist";
+import { AuthContext } from "@/Provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const NavMenu = () => {
   const isUserExist = useIsUserExist();
@@ -14,13 +16,28 @@ const NavMenu = () => {
   // @ts-ignore
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
   const navigate = useNavigate();
-
+  const { logOut } = useContext(AuthContext);
   const handleLogout = async () => {
-    // @ts-ignore
-   const removedCookie = await removeCookie("token", {
-      path: "/",
-    });
-    navigate("/");
+    try {
+      await logOut();
+      // @ts-ignore
+      const removedCookie = await removeCookie("token", {
+        path: "/",
+      });
+      Swal.fire({
+        title: "Logged out",
+        text: "You have been logged out",
+        icon: "success",
+      });
+      navigate("/");
+    } catch (err) {
+      Swal.fire({
+        title: "Oops",
+        text: "Something is wrong, Try Again !!",
+        icon: "error",
+      });
+      console.log(err);
+    }
   };
 
   const items = (

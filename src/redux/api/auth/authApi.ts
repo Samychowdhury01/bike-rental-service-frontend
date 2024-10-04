@@ -12,6 +12,16 @@ const authApi = baseApi.injectEndpoints({
         };
       },
     }),
+    googleAuth: builder.mutation({
+      query: (data) => {
+        console.log(data);
+        return {
+          url: "/auth/google",
+          method: "POST",
+          body: data,
+        };
+      },
+    }),
     login: builder.mutation({
       query: (data) => {
         console.log(data);
@@ -25,4 +35,4 @@ const authApi = baseApi.injectEndpoints({
   }),
 });
 
-export const {useSignUpMutation , useLoginMutation } = authApi;
+export const {useSignUpMutation , useLoginMutation, useGoogleAuthMutation } = authApi;
