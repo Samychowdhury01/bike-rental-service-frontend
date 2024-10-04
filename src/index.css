@@ -75,3 +75,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+.partner-img {
+  mix-blend-mode: multiply;
+}

@@ -19,15 +19,15 @@ import Spinner from "../ui/Spinner";
 import { useState } from "react";
 import { useCookies } from "react-cookie";
 import { jwtDecode } from "jwt-decode";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getErrorData } from "@/utils/getErrorData";
+import SocialLogin from "./SocialLogin";
 
 const Login = () => {
   // location path
   const navigate = useNavigate();
   // redux
   const [login, { isLoading }] = useLoginMutation();
-
 
   // react-form-hook
   const {
@@ -47,33 +47,35 @@ const Login = () => {
   // onSubmit handler
   const onSubmit = async (data: any) => {
     setErrorMessage(""); // Clear any previous error messages
-  
+
     try {
       const response = await login(data);
-  
+
       if (response.data && response.data.token) {
         // Store the token directly from the response
         const token = response.data.token;
-  
+
         // Set the cookie with the token
         setCookie("token", token);
-  
+
         // Decode the token
         // @ts-ignore
         const decoded = jwtDecode<any>(token); // Ensure proper type for the decoded token if needed
-  
+
         Swal.fire({
           icon: "success",
           title: "Success",
           text: response.data.message || "Login successful!",
         });
-  
+
         navigate("/dashboard"); // Redirect to dashboard
         setErrorMessage(""); // Clear any error messages
       } else {
         // Use getErrorData to extract detailed error information
         const errorData = getErrorData(response.error);
-        setErrorMessage(errorData?.message || "Login failed. Please check your credentials.");
+        setErrorMessage(
+          errorData?.message || "Login failed. Please check your credentials."
+        );
         reset(); // Reset form fields
       }
     } catch (error) {
@@ -124,12 +126,21 @@ const Login = () => {
           </div>
           <p className="text-red-500 text-sm">{errorMessage}</p>
         </CardContent>
-        <CardFooter>
-          {isLoading ? (
-            <Spinner />
-          ) : (
-            <Button onClick={handleSubmit(onSubmit)}>Login</Button>
-          )}
+        <CardFooter className="flex flex-col items-start space-y-3">
+          <div>
+            {isLoading ? (
+              <Spinner />
+            ) : (
+              <Button onClick={handleSubmit(onSubmit)}>Login</Button>
+            )}
+          </div>
+          <div className="flex items-center w-full">
+            <div className="h-[2px] bg-black w-full"></div>
+            OR
+            <div className="h-[2px] bg-black  w-full"></div>
+          </div>
+          {/* social login */}
+          <SocialLogin />
         </CardFooter>
       </Card>
     </>

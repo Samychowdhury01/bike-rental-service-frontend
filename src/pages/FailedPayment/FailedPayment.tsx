@@ -15,7 +15,7 @@ const FailedPayment = () => {
           <h2 className="text-2xl font-semibold">Sorry!!</h2>
           <p>Better Luck Next Time!!</p>
           <Button>
-            <Link to="/dashboard">Back to Dashboard</Link>
+            <Link to="/dashboard/bike">Back to Dashboard</Link>
           </Button>
         </div>
 

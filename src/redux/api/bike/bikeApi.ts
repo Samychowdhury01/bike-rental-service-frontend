@@ -5,11 +5,13 @@ const bikeApi = baseApi.injectEndpoints({
     getAllBikes: builder.query({
       query: (query) => {
         const params = new URLSearchParams();
+        console.log('from line 8 api', query);
         if (query) {
           Object.keys(query).forEach((key) => {
             params.append(key, query[key]);
           });
         }
+        console.log('from line 14 api', params);
         return {
           url: "/bikes",
           method: "GET",

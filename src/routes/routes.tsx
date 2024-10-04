@@ -16,11 +16,13 @@ import SuccessPayment from "@/pages/SuccessPayment/SuccessPayment";
 import FailedPayment from "@/pages/FailedPayment/FailedPayment";
 import Welcome from "@/components/ui/Welcome";
 import AdminRoute from "./AdminRoute";
+import ErrorPage from "@/pages/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    errorElement: <ErrorPage/>,
     children: [
       {
         path: "/",

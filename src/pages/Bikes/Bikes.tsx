@@ -12,9 +12,8 @@ const Bikes = () => {
   const [query, setQuery] = useState({});
   const [clear, setClear] = useState(false);
   const { data, isLoading } = useGetAllBikesQuery(query);
-  const  user : any = useDecodeToken()
-console.log(user);
- 
+  const user: any = useDecodeToken();
+  console.log();
   const handleClear = () => {
     setQuery({});
     setClear(!clear);
@@ -23,7 +22,7 @@ console.log(user);
     <div className="space-y-5">
       <div className="flex items-center justify-between">
         {/* add button */}
-        <AddBike />
+        {user?.role === "admin" && <AddBike />}
         {/* filter button */}
         <div className="space-x-1">
           <FilterBike setQuery={setQuery} />
@@ -51,12 +50,7 @@ console.log(user);
             </p>
           ) : (
             data?.data.map((item: any) => (
-              <BikeCard
-                key={item._id}
-                item = {item}
-                role={user && user.role}
-                
-              />
+              <BikeCard key={item._id} item={item} role={user && user.role} />
             ))
           )}
         </div>

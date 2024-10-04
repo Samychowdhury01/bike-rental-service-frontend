@@ -6,18 +6,20 @@ import SideNav from "../dashboard/SideNav";
 
 const DashboardLayout = () => {
   return (
-    <Container>
+    <>
       <Navbar />
-      <div className="grid grid-cols-5 gap-5">
-        <div>
-          <SideNav />
+      <Container>
+        <div className="grid grid-cols-5 gap-5">
+          <div>
+            <SideNav />
+          </div>
+          <div className="col-span-4">
+            <Outlet />
+          </div>
         </div>
-        <div className="col-span-4">
-          <Outlet />
-        </div>
-      </div>
+      </Container>
       <Footer />
-    </Container>
+    </>
   );
 };
 

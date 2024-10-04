@@ -24,7 +24,6 @@ const UnpaidRental = ({ unpaidRental, loading }) => {
     console.log(createBookingData);
 
     const response = await makePayment(createBookingData);
-    console.log(response.data);
     if (response.data) {
       window.location.href = response.data.data.payment_url;
     }
@@ -52,10 +51,10 @@ const UnpaidRental = ({ unpaidRental, loading }) => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {unpaidRental.map((rental) => (
+              {unpaidRental?.map((rental) => (
                 <TableRow key={rental._id}>
                   <TableCell className="font-medium">
-                    {rental?.bikeId.name}
+                    {rental?.bikeId?.name}
                   </TableCell>
                   <TableCell className="font-medium">
                     {formatDate(rental.startTime)}

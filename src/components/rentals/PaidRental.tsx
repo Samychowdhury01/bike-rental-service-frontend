@@ -33,9 +33,9 @@ const PaidRental = ({ paidRental, loading }) => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {paidRental.map((rental) => (
+              {paidRental?.map((rental) => (
                 <TableRow key={rental._id}>
-                  <TableCell>{rental.bikeId.name} TK</TableCell>
+                  <TableCell>{rental?.bikeId?.name} TK</TableCell>
                   <TableCell className="font-medium">
                     {formatDate(rental.startTime)}
                   </TableCell>

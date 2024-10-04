@@ -6,7 +6,7 @@ import useDecodeToken from "@/hooks/useDecodeToken";
 
 const BikeDetailsContainer = ({ data }) => {
   const isUserExist = useIsUserExist();
-  const user : any = useDecodeToken();
+  const user: any = useDecodeToken();
   const bookingInfo = {
     bikeId: data._id,
     isUserExist,
@@ -16,14 +16,15 @@ const BikeDetailsContainer = ({ data }) => {
   return (
     <div className="flex flex-col md:flex-row items-center justify-around mt-10 space-y-5">
       <div className="md:w-[400px]">
-        <img src={data?.image} alt="" className="object-contain w-full h-full" />
+        <img
+          src={data?.image}
+          alt=""
+          className="object-contain w-full h-full"
+        />
       </div>
       <div>
-        <h3 className="text-2xl font-semibold mb-5">Bike Details:</h3>
         <div className="space-y-5 mb-5">
-          <p>
-            <span className="font-semibold mr-2">Name:</span> {data.name}
-          </p>
+          <h3 className="text-2xl font-semibold mb-5">{data.name}</h3>
           <p>
             <span className="font-semibold mr-2">Bike Description:</span>
             {data?.description}
@@ -52,16 +53,13 @@ const BikeDetailsContainer = ({ data }) => {
         <div>
           <BookNow bookingInfo={bookingInfo} />
         </div>
-        {!isUserExist && !data.isAvailable && (
+        {(!isUserExist || !data.isAvailable) && (
           <p className="text-red-500 font-semibold mt-5">
-            You need to login first to book the bike!
+            {!isUserExist
+              ? "You need to login first to book the bike!"
+              : "This bike is not Available for rent"}
           </p>
         )}
-        {/* {!data.isAvailable && (
-          <p className="text-red-500 font-semibold mt-5">
-            This bike is not Available for rent
-          </p>
-        )} */}
       </div>
     </div>
   );

@@ -12,13 +12,8 @@ import {
 import { Link } from "react-router-dom";
 
 const Featured = () => {
-  const { data, } = useGetAllBikesQuery("");
-  let bikes;
-
-  if (data.data) {
-    bikes = data.data.filter((bike) => bike.isAvailable);
-  }
-
+  const { data: bikes } = useGetAllBikesQuery({ isAvailable: true });
+console.log(bikes);
   return (
     <div className="space-y-5 mt-16 p-5 md:p-9">
       {/* heading */}
@@ -32,8 +27,8 @@ const Featured = () => {
       />
       {/* cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {bikes?.map((bike) => (
-          <Card>
+        {bikes?.data && bikes?.data?.map((bike) => (
+          <Card key={bike._id}>
             <CardHeader>
               <div className="md:h-[250px] w-full mb-2">
                 <img
