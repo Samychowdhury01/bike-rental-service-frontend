@@ -9,12 +9,21 @@ const userApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
-      providesTags: ['user']
+      providesTags: ["user"],
     }),
     getAllUsers: builder.query({
       query: () => {
         return {
           url: "/users",
+          method: "GET",
+        };
+      },
+      providesTags: ["user"],
+    }),
+    getDashboardData: builder.query({
+      query: () => {
+        return {
+          url: `/users/dashboard`,
           method: "GET",
         };
       },
@@ -56,4 +65,5 @@ export const {
   useRemoveUserMutation,
   useGetAllUsersQuery,
   usePromoteUserMutation,
+  useGetDashboardDataQuery,
 } = userApi;

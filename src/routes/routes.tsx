@@ -18,12 +18,13 @@ import Welcome from "@/components/ui/Welcome";
 import AdminRoute from "./AdminRoute";
 import ErrorPage from "@/pages/ErrorPage/ErrorPage";
 import MyProfile from "@/pages/MyProfile/MyProfile";
+import Overview from "@/components/dashboard/Overview";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
-    errorElement: <ErrorPage/>,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -43,7 +44,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/my-profile",
-        element: <MyProfile />,
+        element: (
+          <PrivateRoute>
+            <MyProfile />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/checkout-success",
@@ -65,7 +70,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/dashboard",
-        element: <Welcome />,
+        element: <Overview />,
       },
       {
         path: "/dashboard/profile",
