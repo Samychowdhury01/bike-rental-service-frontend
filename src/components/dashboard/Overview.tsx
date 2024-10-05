@@ -3,15 +3,16 @@ import useDecodeToken from "@/hooks/useDecodeToken";
 import Welcome from "../ui/Welcome";
 import AdminOverview from "./AdminOverview";
 import UserOverview from "./UserOverview";
+import Container from "../ui/Container";
 
 const Overview = () => {
   const user: any = useDecodeToken();
   return (
-    <div>
+    <Container>
       <Welcome />
       {user && user.role === "admin" ? <AdminOverview /> : <UserOverview />}
       
-    </div>
+    </Container>
   );
 };
 

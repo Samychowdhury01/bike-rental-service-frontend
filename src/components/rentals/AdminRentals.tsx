@@ -21,6 +21,7 @@ const AdminRentals = () => {
   //   Handle Calculate
   const HandleCalculate = async (id: string) => {
     const response = await returnBike(id);
+    
     console.log(response);
   };
 
@@ -64,7 +65,7 @@ const AdminRentals = () => {
                       <Button
                         onClick={() => HandleCalculate(rental._id)}
                         size="sm"
-                        disabled={rental.totalCost !== 0}
+                        disabled={rental.totalCost === 0}
                         variant="outline"
                       >
                         Calculate

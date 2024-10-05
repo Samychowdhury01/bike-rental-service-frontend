@@ -6,5 +6,4 @@ const useIsUserExist = () => {
   const isUserValid = user && user.exp && user.exp > Date.now() / 1000; // Ensure the token is not expired
   return Boolean(isUserValid);
 };
-
 export default useIsUserExist;

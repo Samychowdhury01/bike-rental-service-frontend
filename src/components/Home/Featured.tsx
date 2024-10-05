@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 
 const Featured = () => {
   const { data: bikes } = useGetAllBikesQuery({ isAvailable: true });
-console.log(bikes);
+  console.log(bikes);
   return (
     <div className="space-y-5 mt-16 p-5 md:p-9">
       {/* heading */}
@@ -26,32 +26,33 @@ console.log(bikes);
         width=" w-1/4"
       />
       {/* cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {bikes?.data && bikes?.data?.map((bike) => (
-          <Card key={bike._id}>
-            <CardHeader>
-              <div className="md:h-[250px] w-full mb-2">
-                <img
-                  src={bike.image}
-                  alt=""
-                  className="object-fill h-full w-full rounded-md shadow-md"
-                />
-              </div>
-              <CardTitle>{bike.name}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>
-                <span className="font-semibold mr-1">Description:</span>
-                {bike.description}
-              </p>
-            </CardContent>
-            <CardFooter>
-              <Button>
-                <Link to={`/details/${bike._id}`}>View Details</Link>
-              </Button>
-            </CardFooter>
-          </Card>
-        ))}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        {bikes?.data &&
+          bikes?.data?.map((bike) => (
+            <Card key={bike._id}>
+              <CardHeader>
+                <div className="md:h-[200px] w-full mb-2">
+                  <img
+                    src={bike.image}
+                    alt=""
+                    className="object-cover h-full w-full rounded-md shadow-md"
+                  />
+                </div>
+                <CardTitle>{bike.name}</CardTitle>
+              </CardHeader>
+              <CardContent className="md:h-[100px] mb-5">
+                <p>
+                  <span className="font-semibold mr-1">Description:</span>
+                  {bike.description}
+                </p>
+              </CardContent>
+              <CardFooter>
+                <Button>
+                  <Link to={`/details/${bike._id}`}>View Details</Link>
+                </Button>
+              </CardFooter>
+            </Card>
+          ))}
       </div>
       <div className="text-center">
         <Button>

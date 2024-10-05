@@ -7,6 +7,7 @@ import FilterBike from "@/components/bike/FilterBike";
 import { Button } from "@/components/ui/button";
 import AddBike from "@/components/bike/AddBike";
 import useDecodeToken from "@/hooks/useDecodeToken";
+import Container from "@/components/ui/Container";
 
 const Bikes = () => {
   const [query, setQuery] = useState({});
@@ -19,43 +20,45 @@ const Bikes = () => {
     setClear(!clear);
   };
   return (
-    <div className="space-y-5">
-      <div className="flex items-center justify-between">
-        {/* add button */}
-        {user?.role === "admin" && <AddBike />}
-        {/* filter button */}
-        <div className="space-x-1">
-          <FilterBike setQuery={setQuery} />
-          {Object.keys(query).length !== 0 && (
-            <Button
-              onClick={handleClear}
-              size="sm"
-              variant="outline"
-              className="rounded-lg"
-            >
-              X
-            </Button>
-          )}
+    <Container>
+      <div className="space-y-5">
+        <div className="flex items-center justify-between">
+          {/* add button */}
+          {user?.role === "admin" && <AddBike />}
+          {/* filter button */}
+          <div className="space-x-1">
+            <FilterBike setQuery={setQuery} />
+            {Object.keys(query).length !== 0 && (
+              <Button
+                onClick={handleClear}
+                size="sm"
+                variant="outline"
+                className="rounded-lg"
+              >
+                X
+              </Button>
+            )}
+          </div>
         </div>
+        {isLoading ? (
+          <div className="flex items-center justify-center">
+            <Spinner />
+          </div>
+        ) : (
+          <div className="grid grid-cols-3 gap-2">
+            {!data.data.length ? (
+              <p className="flex items-center justify-center text-red-500">
+                No data Found
+              </p>
+            ) : (
+              data?.data.map((item: any) => (
+                <BikeCard key={item._id} item={item} role={user && user.role} />
+              ))
+            )}
+          </div>
+        )}
       </div>
-      {isLoading ? (
-        <div className="flex items-center justify-center">
-          <Spinner />
-        </div>
-      ) : (
-        <div className="grid grid-cols-3 gap-2">
-          {!data.data.length ? (
-            <p className="flex items-center justify-center text-red-500">
-              No data Found
-            </p>
-          ) : (
-            data?.data.map((item: any) => (
-              <BikeCard key={item._id} item={item} role={user && user.role} />
-            ))
-          )}
-        </div>
-      )}
-    </div>
+    </Container>
   );
 };
 

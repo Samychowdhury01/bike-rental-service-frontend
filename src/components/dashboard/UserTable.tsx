@@ -9,7 +9,7 @@ import {
 const UserTable = ({ users }) => {
   return (
     <>
-      <Table className="border">
+      <Table className="border w-96 text-[13px]">
         <TableHeader>
           <TableRow>
             <TableHead>Name</TableHead>

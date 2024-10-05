@@ -12,7 +12,7 @@ const AdminOverview = () => {
     <>
       {/* card */}
       {isLoading ? (
-        <div className="flex items-center justify-center">
+        <div className="flex items-center justify-center mt-16">
           <Spinner />
         </div>
       ) : (
@@ -22,23 +22,25 @@ const AdminOverview = () => {
             <TopCard title="Total Bikes" text={data?.data?.totalBikes} />
             <TopCard title="Total Bookings" text={data?.data?.totalBookings} />
           </div>
-          {/* chart */}
-          <div className="w-1/3 mx-auto">
-            <h3 className="mb-5 text-2xl text-primary font-semibold text-center">
-              Total paid Users
-            </h3>
-            <Chart
-              amount={data?.data?.averagePaidBookings}
-              from={data?.data?.totalBookings}
-              type='users'
-            />
-          </div>
-          {/* recent users */}
-          <div>
-            <h3 className="text-center mb-5 text-2xl text-primary font-semibold">
-              Recent Users
-            </h3>
-            <UserTable users={data?.data?.recentUsers} />
+          <div className="flex items-center">
+            {/* recent users */}
+            <div>
+              <h3 className="text-center mb-5 text-2xl text-primary font-semibold">
+                Recent Users
+              </h3>
+              <UserTable users={data?.data?.recentUsers} />
+            </div>
+            {/* chart */}
+            <div className="w-1/3 mx-auto">
+              <h3 className="mb-5 text-2xl text-primary font-semibold text-center">
+                Total paid Users
+              </h3>
+              <Chart
+                amount={data?.data?.averagePaidBookings}
+                from={data?.data?.totalBookings}
+                type="users"
+              />
+            </div>
           </div>
         </div>
       )}

@@ -46,36 +46,26 @@ const BikeCard = ({ role, item }: { role: string; item: any }) => {
     <>
       <Card>
         <CardHeader>
-          <div className="md:h-[250px] w-full mb-2">
+          <div className="md:h-[200px] w-full mb-2">
             <img
               src={item.image}
               alt=""
-              className="object-fill h-full w-full rounded-md shadow-md"
+              className="object-cover h-full w-full rounded-md shadow-md"
             />
           </div>
           <CardTitle>{item.name}</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="h-32">
           <p>
-            <span className="font-semibold mr-1">Description:</span>{" "}
+            <span className="font-semibold mr-1">Description:</span>
             {item.description}
           </p>
           <p>
             <span className="font-semibold mr-1">Brand:</span>
             {item.brand}
           </p>
-          <p>
-            <span className="font-semibold mr-1">Model:</span>
-            {item.model}
-          </p>
-          <p>
-            <span className="font-semibold mr-1">CC:</span>
-            {item.cc}
-          </p>
-          <p>
-            <span className="font-semibold mr-1">Year:</span>
-            {item.year}
-          </p>
+     
+    
           <p>
             <span className="font-semibold mr-1">Price Per Hour:</span>{" "}
             {item.pricePerHour}TK

@@ -10,7 +10,7 @@ import {
 const BikesTable = ({ bikes }) => {
   return (
     <>
-      <Table className="border">
+      <Table className="border w-96 text-[13px]">
         <TableHeader>
           <TableRow>
             <TableHead>Bike Name</TableHead>

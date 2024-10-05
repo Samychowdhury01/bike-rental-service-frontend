@@ -3,9 +3,14 @@ import SideActiveLink from "./SideActiveLink";
 import useDecodeToken from "@/hooks/useDecodeToken";
 
 const SideNav = () => {
-  const user : any = useDecodeToken();
+  const user: any = useDecodeToken();
   const userNavItem = (
     <>
+      <li>
+        <SideActiveLink to="/dashboard" exact={true}>
+          Overview
+        </SideActiveLink>
+      </li>
       <li>
         <SideActiveLink to="/dashboard/profile">Profile</SideActiveLink>
       </li>
@@ -19,6 +24,11 @@ const SideNav = () => {
   );
   const adminNavItem = (
     <>
+      <li>
+        <SideActiveLink to="/dashboard" exact={true}>
+          Overview
+        </SideActiveLink>
+      </li>
       <li>
         <SideActiveLink to="/dashboard/profile">Profile</SideActiveLink>
       </li>
@@ -38,7 +48,7 @@ const SideNav = () => {
   );
 
   return (
-    <div className="bg-secondary p-5 rounded-md h-full">
+    <div className="bg-muted p-5 h-full">
       <ul className="space-y-5">
         {user.role === "user" ? userNavItem : adminNavItem}
       </ul>

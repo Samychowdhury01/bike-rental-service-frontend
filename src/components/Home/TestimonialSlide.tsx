@@ -39,7 +39,7 @@ const TestimonialSlide = () => {
     <div className="md:bg-muted rounded-xl">
       <div
         ref={sliderRef}
-        className="keen-slider md:h-96 bg-muted md:bg-transparent  mb-24 p-2 rounded-xl shadow-2xl"
+        className="keen-slider md:h-56 bg-muted md:bg-transparent  mb-24 p-2 rounded-xl shadow-2xl"
       >
         {reviews.map((review, index) => (
           <div

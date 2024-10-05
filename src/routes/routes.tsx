@@ -14,10 +14,8 @@ import Rental from "@/pages/Rental/Rental";
 import BikeDetails from "@/pages/BikeDetails/BikeDetails";
 import SuccessPayment from "@/pages/SuccessPayment/SuccessPayment";
 import FailedPayment from "@/pages/FailedPayment/FailedPayment";
-import Welcome from "@/components/ui/Welcome";
 import AdminRoute from "./AdminRoute";
 import ErrorPage from "@/pages/ErrorPage/ErrorPage";
-import MyProfile from "@/pages/MyProfile/MyProfile";
 import Overview from "@/components/dashboard/Overview";
 
 const router = createBrowserRouter([
@@ -41,14 +39,6 @@ const router = createBrowserRouter([
       {
         path: "/details/:id",
         element: <BikeDetails />,
-      },
-      {
-        path: "/my-profile",
-        element: (
-          <PrivateRoute>
-            <MyProfile />
-          </PrivateRoute>
-        ),
       },
       {
         path: "/checkout-success",

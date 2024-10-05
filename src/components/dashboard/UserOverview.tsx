@@ -31,23 +31,25 @@ const UserOverview = () => {
               text={`${data?.data?.averageCostPerHour}$`}
             />
           </div>
-          {/* chart */}
-          <div className="w-1/3 mx-auto">
-            <h3 className="mb-5 text-2xl text-primary font-semibold text-center">
-              Total Returned Bikes
-            </h3>
-            <Chart
-              amount={ReturnedBikes}
-              from={(data?.data?.bookings as any).length || 100}
-              type="bikes"
-            />
-          </div>
-          {/* recent users */}
-          <div>
-            <h3 className="text-center mb-5 text-2xl text-primary font-semibold">
-              Recent Rented Bikes
-            </h3>
-            <BikesTable bikes={data?.data?.bookings} />
+          <div className="flex items-center">
+            {/* recent users */}
+            <div>
+              <h3 className="text-center mb-5 text-2xl text-primary font-semibold">
+                Recent Rented Bikes
+              </h3>
+              <BikesTable bikes={data?.data?.bookings} />
+            </div>
+            {/* chart */}
+            <div className="w-1/3 mx-auto">
+              <h3 className="mb-5 text-2xl text-primary font-semibold text-center">
+                Total Returned Bikes
+              </h3>
+              <Chart
+                amount={ReturnedBikes}
+                from={(data?.data?.bookings as any).length || 100}
+                type="bikes"
+              />
+            </div>
           </div>
         </div>
       )}

@@ -3,9 +3,20 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const Chart = ({ amount, from, type }: { amount: number, from: number, type: string }) => {
+const Chart = ({
+  amount,
+  from,
+  type,
+}: {
+  amount: number;
+  from: number;
+  type: string;
+}) => {
   const data = {
-    labels: ["Returned", "Not Returned"],
+    labels:
+      type === "user"
+        ? ["Returned", "Not Returned"]
+        : ["paid user", "Not paid user"],
     datasets: [
       {
         label: type,
@@ -30,7 +41,6 @@ const Chart = ({ amount, from, type }: { amount: number, from: number, type: str
   };
   return (
     <>
-    
       <div>
         <Doughnut data={data} options={options} />
       </div>
