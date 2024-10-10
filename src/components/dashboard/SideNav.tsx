@@ -15,9 +15,6 @@ const SideNav = () => {
         <SideActiveLink to="/dashboard/profile">Profile</SideActiveLink>
       </li>
       <li>
-        <SideActiveLink to="/dashboard/bikes">Bikes</SideActiveLink>
-      </li>
-      <li>
         <SideActiveLink to="/dashboard/rentals">My Rentals</SideActiveLink>
       </li>
     </>
@@ -50,7 +47,7 @@ const SideNav = () => {
   return (
     <div className="bg-muted p-5 h-full">
       <ul className="space-y-5">
-        {user.role === "user" ? userNavItem : adminNavItem}
+        {user?.role === "user" ? userNavItem : adminNavItem}
       </ul>
     </div>
   );

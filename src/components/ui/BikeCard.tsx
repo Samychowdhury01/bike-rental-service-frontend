@@ -55,7 +55,7 @@ const BikeCard = ({ role, item }: { role: string; item: any }) => {
           </div>
           <CardTitle>{item.name}</CardTitle>
         </CardHeader>
-        <CardContent className="h-32">
+        <CardContent className="md:h-32">
           <p>
             <span className="font-semibold mr-1">Description:</span>
             {item.description}

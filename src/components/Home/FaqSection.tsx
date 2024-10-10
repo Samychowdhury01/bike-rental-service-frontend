@@ -47,7 +47,7 @@ const FaqSection = () => {
         <Accordion type="single" collapsible className="flex-1">
           {faqs.map((faq, index) => (
             <AccordionItem key={index} value={faq.value}>
-              <AccordionTrigger>{faq?.question}</AccordionTrigger>
+              <AccordionTrigger className="text-left">{faq?.question}</AccordionTrigger>
               <AccordionContent>{faq.answer}</AccordionContent>
             </AccordionItem>
           ))}

@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -17,11 +15,11 @@ import Swal from "sweetalert2";
 import { useLoginMutation } from "@/redux/api/auth/authApi";
 import Spinner from "../ui/Spinner";
 import { useState } from "react";
-import { useCookies } from "react-cookie";
-import { jwtDecode } from "jwt-decode";
+
 import { useNavigate } from "react-router-dom";
 import { getErrorData } from "@/utils/getErrorData";
 import SocialLogin from "./SocialLogin";
+import useToken from "@/hooks/useToken";
 
 const Login = () => {
   // location path
@@ -50,34 +48,33 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   // cookies for testing
-  const [, setCookie] = useCookies(["token"]);
-
+  // const [, setCookie] = useCookies(["token"]);
+  // custom hook for save the token in localStorage
+  const { saveToken } = useToken("token");
   // onSubmit handler
   const onSubmit = async (data: any) => {
-    console.log(data);
     setErrorMessage(""); // Clear any previous error messages
 
     try {
       const response = await login(data);
-
-      if (response.data && response.data.token) {
+      console.log(response);
+      if (response?.data && response?.data?.token) {
         // Store the token directly from the response
-        const token = response.data.token;
+        const token = response?.data?.token;
 
         // Set the cookie with the token
-        setCookie("token", token);
-
-        // Decode the token
-        // @ts-ignore
-        const decoded = jwtDecode<any>(token); // Ensure proper type for the decoded token if needed
-
+        // setCookie("token", token, {
+        //   path: "/",
+        //   maxAge: 86400,
+        // });
+        saveToken(token);
         Swal.fire({
           icon: "success",
           title: "Success",
           text: response.data.message || "Login successful!",
         });
 
-        navigate("/dashboard"); // Redirect to dashboard
+        navigate("/"); // Redirect to dashboard
         setErrorMessage(""); // Clear any error messages
       } else {
         // Use getErrorData to extract detailed error information

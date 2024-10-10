@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import AddBike from "@/components/bike/AddBike";
 import useDecodeToken from "@/hooks/useDecodeToken";
 import Container from "@/components/ui/Container";
+import SectionHeading from "@/components/ui/SectionHeading";
 
 const Bikes = () => {
   const [query, setQuery] = useState({});
@@ -21,6 +22,7 @@ const Bikes = () => {
   };
   return (
     <Container>
+      <SectionHeading title="Bikes" text="" width="w-1/12" />
       <div className="space-y-5">
         <div className="flex items-center justify-between">
           {/* add button */}
@@ -45,14 +47,18 @@ const Bikes = () => {
             <Spinner />
           </div>
         ) : (
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
             {!data.data.length ? (
               <p className="flex items-center justify-center text-red-500">
                 No data Found
               </p>
             ) : (
               data?.data.map((item: any) => (
-                <BikeCard key={item._id} item={item} role={user && user.role} />
+                <BikeCard
+                  key={item._id}
+                  item={item}
+                  role={user && user?.role}
+                />
               ))
             )}
           </div>

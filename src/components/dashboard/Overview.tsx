@@ -10,7 +10,7 @@ const Overview = () => {
   return (
     <Container>
       <Welcome />
-      {user && user.role === "admin" ? <AdminOverview /> : <UserOverview />}
+      {user && user?.role === "admin" ? <AdminOverview /> : <UserOverview />}
       
     </Container>
   );

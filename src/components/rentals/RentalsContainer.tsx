@@ -6,7 +6,7 @@ import UserRentals from "./UserRentals";
 const RentalsContainer = () => {
   const user: any = useDecodeToken();
   return (
-    <div>{user.role === "admin" ? <AdminRentals /> : <UserRentals />}</div>
+    <div>{user?.role === "admin" ? <AdminRentals /> : <UserRentals />}</div>
   );
 };
 

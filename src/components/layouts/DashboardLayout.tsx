@@ -9,11 +9,11 @@ const DashboardLayout = () => {
     <>
       <Navbar />
 
-      <div className="grid grid-cols-5 gap-5">
-        <div className="h-screen">
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-5">
+        <div className="lg:h-screen">
           <SideNav />
         </div>
-        <div className="col-span-4 mt-5 p-5">
+        <div className="lg:col-span-4 lg:mt-5 lg:p-5">
           <Outlet />
         </div>
       </div>

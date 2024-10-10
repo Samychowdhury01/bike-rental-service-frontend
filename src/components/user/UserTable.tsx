@@ -109,8 +109,8 @@ const UserTable = () => {
         {data?.data.map((user) => (
           <TableRow key={user._id}>
             <TableCell className="font-medium">{user.name}</TableCell>
-            <TableCell>{user.email}</TableCell>
-            <TableCell>{user.role}</TableCell>
+            <TableCell>{user?.email}</TableCell>
+            <TableCell>{user?.role}</TableCell>
             <TableCell>
               <div className="flex gap-2">
                 <Button
@@ -118,7 +118,7 @@ const UserTable = () => {
                   variant="outline"
                   size="sm"
                   disabled={
-                    promotingUserId === user._id || user.role === "admin"
+                    promotingUserId === user._id || user?.role === "admin"
                   }
                 >
                   {promotingUserId === user._id ? <Spinner /> : "Promote"}

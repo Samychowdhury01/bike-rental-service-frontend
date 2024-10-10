@@ -17,7 +17,7 @@ const PaidRental = ({ paidRental, loading }) => {
       </div>
     );
   }
-
+console.log(paidRental);
   return (
     <>
       <div>
@@ -35,7 +35,7 @@ const PaidRental = ({ paidRental, loading }) => {
             <TableBody>
               {paidRental?.map((rental) => (
                 <TableRow key={rental._id}>
-                  <TableCell>{rental?.bikeId?.name} TK</TableCell>
+                  <TableCell>{rental?.bikeId?.name}</TableCell>
                   <TableCell className="font-medium">
                     {formatDate(rental.startTime)}
                   </TableCell>

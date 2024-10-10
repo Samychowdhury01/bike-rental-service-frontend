@@ -19,7 +19,7 @@ const UserTable = ({ users }) => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {users.map((user) => (
+          {users?.map((user) => (
             <TableRow key={user._id}>
               <TableCell className="font-medium">{user.name}</TableCell>
               <TableCell>{user.email}</TableCell>

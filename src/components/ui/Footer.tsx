@@ -22,13 +22,13 @@ const Footer = () => {
               <h4 className="text-lg font-semibold">Explore</h4>
               <ul>
                 <li>
-                  <NavLink to="/">Privacy Policy</NavLink>
+                  <NavLink to="/policy">Privacy Policy</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/about">Terms of Service</NavLink>
+                  <NavLink to="/terms">Terms of Service</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/auth"> Contact Us</NavLink>
+                  <NavLink to="/contact-us"> Contact Us</NavLink>
                 </li>
               </ul>
             </div>

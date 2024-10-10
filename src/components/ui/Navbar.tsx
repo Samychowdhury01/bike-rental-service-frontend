@@ -10,7 +10,7 @@ const Navbar = () => {
       {!dashboardPath ? (
         <div className="bg-muted">
           <Container>
-            <div className="flex md:items-center justify-between p-2">
+            <div className="flex md:items-center justify-between">
               {/* logo */}
               <div>
                 <h1 className="text-gradient text-2xl md:text-4xl font-bold">
@@ -26,7 +26,7 @@ const Navbar = () => {
           </Container>
         </div>
       ) : (
-        <div className="bg-muted p-5">
+        <div className="bg-muted">
           <div className="flex md:items-center justify-between p-2">
             {/* logo */}
             <div>

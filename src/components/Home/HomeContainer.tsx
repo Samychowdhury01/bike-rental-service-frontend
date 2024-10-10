@@ -1,3 +1,4 @@
+import Container from "../ui/Container";
 import ChooseUs from "./ChooseUs";
 import ContactUs from "./ContactUs";
 import Coupon from "./Coupon";
@@ -11,13 +12,15 @@ const HomeContainer = () => {
   return (
     <>
       <Header />
-      <Featured />
-      <Testimonials />
-      <ChooseUs />
-      <Coupon />
-      <Partner />
-      <FaqSection />
-      <ContactUs />
+      <Container>
+        <Featured />
+        <Testimonials />
+        <ChooseUs />
+        <Coupon />
+        <Partner />
+        <FaqSection />
+        <ContactUs />
+      </Container>
     </>
   );
 };
