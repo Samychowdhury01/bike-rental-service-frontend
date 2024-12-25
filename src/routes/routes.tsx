@@ -17,6 +17,9 @@ import FailedPayment from "@/pages/FailedPayment/FailedPayment";
 import AdminRoute from "./AdminRoute";
 import ErrorPage from "@/pages/ErrorPage/ErrorPage";
 import Overview from "@/components/dashboard/Overview";
+import Contact from "@/pages/Contact/Contact";
+import Privacy from "@/pages/Privacy/Privacy";
+import Terms from "@/pages/Terms/Terms";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +40,10 @@ const router = createBrowserRouter([
         element: <Auth />,
       },
       {
+        path: "/bikes",
+        element: <Bikes />,
+      },
+      {
         path: "/details/:id",
         element: <BikeDetails />,
       },
@@ -47,6 +54,18 @@ const router = createBrowserRouter([
       {
         path: "/checkout-fail",
         element: <FailedPayment />,
+      },
+      {
+        path: "/contact-us",
+        element: <Contact />,
+      },
+      {
+        path: "/policy",
+        element: <Privacy />,
+      },
+      {
+        path: "/terms",
+        element: <Terms />,
       },
     ],
   },

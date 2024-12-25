@@ -1,8 +1,10 @@
-import useGetToken from "./useGetToken";
+
 import { jwtDecode } from "jwt-decode";
+import useToken from "./useToken";
 
 const useDecodeToken = () => {
-  const token = useGetToken();
+  // const token = useGetToken();
+  const { token } = useToken("token");
   if (token) {
     try {
       const decodedToken = jwtDecode(token);

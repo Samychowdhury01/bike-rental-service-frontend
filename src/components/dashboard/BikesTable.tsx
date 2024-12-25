@@ -9,8 +9,8 @@ import {
 
 const BikesTable = ({ bikes }) => {
   return (
-    <>
-      <Table className="border w-96 text-[13px]">
+    <div>
+      <Table className="border md:w-96 text-[13px]">
         <TableHeader>
           <TableRow>
             <TableHead>Bike Name</TableHead>
@@ -22,7 +22,7 @@ const BikesTable = ({ bikes }) => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {bikes.slice(0,5).map((bike) => (
+          {bikes?.slice(0,5).map((bike) => (
             <TableRow key={bike._id}>
               
               <TableCell>{bike.bikeId?.name}</TableCell>
@@ -34,7 +34,7 @@ const BikesTable = ({ bikes }) => {
           ))}
         </TableBody>
       </Table>
-    </>
+    </div>
   );
 };
 

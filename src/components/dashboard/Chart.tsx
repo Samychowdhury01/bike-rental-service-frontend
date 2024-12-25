@@ -12,6 +12,7 @@ const Chart = ({
   from: number;
   type: string;
 }) => {
+  console.log(amount, from, type);
   const data = {
     labels:
       type === "user"

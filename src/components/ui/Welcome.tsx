@@ -9,17 +9,16 @@ const Welcome = () => {
     month: "long",
     year: "numeric",
   });
-  console.log(user);
 
   return (
     <div className="bg-muted flex justify-between p-5 rounded-md shadow-lg shadow-secondary">
       <div>
         <p>{formattedDate}</p>
-        <div className="mt-10">
-          <h3 className="text-3xl text-primary font-semibold">
-            Welcome back, {user.username}
+        <div className="mt-5 md:mt-10">
+          <h3 className="text-xl md:text-3xl text-primary font-semibold">
+            Welcome back, {user?.username}
           </h3>
-          <p>Thank you for choosing us!</p>
+          <p className="text-sm md:text-base">Thank you for choosing us!</p>
         </div>
       </div>
       <div className="">

@@ -12,7 +12,7 @@ import {
 import { Link } from "react-router-dom";
 
 const Featured = () => {
-  const { data: bikes } = useGetAllBikesQuery({ isAvailable: true });
+  const { data: bikes } = useGetAllBikesQuery('');
   console.log(bikes);
   return (
     <div className="space-y-5 mt-16 p-5 md:p-9">
@@ -28,7 +28,7 @@ const Featured = () => {
       {/* cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
         {bikes?.data &&
-          bikes?.data?.map((bike) => (
+          bikes?.data?.slice(0,4)?.map((bike) => (
             <Card key={bike._id}>
               <CardHeader>
                 <div className="md:h-[200px] w-full mb-2">
@@ -55,9 +55,11 @@ const Featured = () => {
           ))}
       </div>
       <div className="text-center">
-        <Button>
-          <Link to="dashboard/bikes">View All Bikes</Link>
+       <Link to='/bikes'>
+       <Button>
+       View All Bikes
         </Button>
+       </Link>
       </div>
     </div>
   );

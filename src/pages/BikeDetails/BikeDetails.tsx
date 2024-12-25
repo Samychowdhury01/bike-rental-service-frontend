@@ -6,13 +6,13 @@ import Container from "@/components/ui/Container";
 
 const BikeDetails = () => {
   const { id } = useParams();
-  const { data } = useGetSingleBikeQuery(id);
+  const { data, isLoading } = useGetSingleBikeQuery(id);
 
   return (
     <Container>
       <SectionHeading text="" title="Bike Details" width="w-1/6" />
       {data && (
-        <BikeDetailsContainer data={data?.data}/>
+        <BikeDetailsContainer data={data?.data} isLoading={isLoading}/>
       )}
     </Container>
   );

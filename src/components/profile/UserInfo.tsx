@@ -56,11 +56,11 @@ const UserInfo = () => {
     }
   };
   return (
-    <div className="space-y-5 p-5 md:p-0">
+    <div className="space-y-5">
       {/* <SectionHeading title="Profile" text="" width="w-28" /> */}
       <Banner />
       {data && (
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           <div className="space-y-1">
             <Label htmlFor="name">Name</Label>
             <Input

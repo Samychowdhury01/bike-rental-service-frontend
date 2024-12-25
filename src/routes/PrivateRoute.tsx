@@ -1,22 +1,20 @@
-
-import { useNavigate } from "react-router-dom";
-import useGetToken from "@/hooks/useGetToken";
+import useToken from "@/hooks/useToken";
+import { Navigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const PrivateRoute = ({ children }) => {
-  const navigate = useNavigate();
-  const token = useGetToken();
+  const {token} = useToken('token');
 
-  if (!token) {
+  if (token) {
+    return children;
+  } else {
     Swal.fire({
       title: "Error",
       text: "You must be logged in to access this page",
       icon: "error",
     });
-    navigate("/auth", { replace: true });
+    return <Navigate to="/auth"></Navigate>;
   }
-
-  return children;
 };
 
 export default PrivateRoute;

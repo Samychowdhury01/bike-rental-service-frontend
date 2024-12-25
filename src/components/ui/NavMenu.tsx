@@ -1,29 +1,34 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import ActiveLink from "./ActiveLink";
 import { Button } from "./button";
 import { HiMenuAlt1, HiX } from "react-icons/hi";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
+
 import { useContext, useState } from "react";
 import useIsUserExist from "@/hooks/useIsUserExist";
 import { AuthContext } from "@/Provider/AuthProvider";
 import Swal from "sweetalert2";
+import useDecodeToken from "@/hooks/useDecodeToken";
+import useToken from "@/hooks/useToken";
 
 const NavMenu = () => {
+  const user = useDecodeToken();
+  console.log(user);
   const isUserExist = useIsUserExist();
   const [isOpen, setIsOpen] = useState(false);
   // @ts-ignore
-  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
+  // const [cookies, setCookie, removeCookie] = useCookies(["token"]);
+  const { removeToken } = useToken("token");
   const navigate = useNavigate();
   const { logOut } = useContext(AuthContext);
   const handleLogout = async () => {
     try {
       await logOut();
       // @ts-ignore
-      const removedCookie = await removeCookie("token", {
-        path: "/",
-      });
+      // const removedCookie = await removeCookie("token", {
+      //   path: "/",
+      // });
+      removeToken();
       Swal.fire({
         title: "Logged out",
         text: "You have been logged out",
@@ -46,21 +51,22 @@ const NavMenu = () => {
         <ActiveLink to="/">Home</ActiveLink>
       </li>
       <li>
-        <ActiveLink to="/about">About Us</ActiveLink>
+        <ActiveLink to="/bikes">Bikes</ActiveLink>
       </li>
       <li>
-        {isUserExist && <ActiveLink to="/my-profile">My Profile</ActiveLink>}
+        <ActiveLink to="/about">About Us</ActiveLink>
       </li>
+
       <li>
         {isUserExist && <ActiveLink to="/dashboard">Dashboard</ActiveLink>}
       </li>
       <li>
         {!isUserExist ? (
-          <Button variant="outline">
+          <Button className="rounded-full">
             <NavLink to="/auth">Login</NavLink>
           </Button>
         ) : (
-          <Button onClick={handleLogout} variant="outline">
+          <Button onClick={handleLogout} className="rounded-full">
             Logout
           </Button>
         )}

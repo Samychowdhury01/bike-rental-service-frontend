@@ -17,7 +17,7 @@ const AdminRentals = () => {
   const { data, isLoading } = useGetAllBookingQuery("");
   const [returnBike] = useUpdateBookingMutation();
 
-
+console.log(data);
   //   Handle Calculate
   const HandleCalculate = async (id: string) => {
     const response = await returnBike(id);
@@ -65,7 +65,7 @@ const AdminRentals = () => {
                       <Button
                         onClick={() => HandleCalculate(rental._id)}
                         size="sm"
-                        disabled={rental.totalCost === 0}
+                        disabled={rental.isReturned}
                         variant="outline"
                       >
                         Calculate
