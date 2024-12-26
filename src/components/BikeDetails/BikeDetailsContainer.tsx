@@ -4,8 +4,9 @@ import BookNow from "./BookNow";
 import useIsUserExist from "@/hooks/useIsUserExist";
 import useDecodeToken from "@/hooks/useDecodeToken";
 import Spinner from "../ui/Spinner";
+import TabContainer from "./TabContainer";
 
-const BikeDetailsContainer = ({ data, isLoading }) => {
+const BikeDetailsContainer = ({ data, isLoading, id }) => {
   const isUserExist = useIsUserExist();
   const user: any = useDecodeToken();
   const bookingInfo = {
@@ -22,7 +23,9 @@ const BikeDetailsContainer = ({ data, isLoading }) => {
           <Spinner />
         </div>
       ) : (
-        <div className="flex flex-col md:flex-row items-center justify-around mt-10 space-y-5">
+        <div>
+          {/* text and image */}
+          <div className="flex flex-col md:flex-row items-center justify-around mt-10 space-y-5">
           <div className="md:w-[400px]">
             <img
               src={data?.image}
@@ -34,7 +37,7 @@ const BikeDetailsContainer = ({ data, isLoading }) => {
             <div className="space-y-5 mb-5">
               <h3 className="text-2xl font-semibold mb-5">{data.name}</h3>
               <p>
-                <span className="font-semibold mr-2">Bike Description:</span>
+                <span className="font-semibold mr-2 line-clamp-1">Bike Description:</span>
                 {data?.description}
               </p>
               <p>
@@ -69,6 +72,11 @@ const BikeDetailsContainer = ({ data, isLoading }) => {
               </p>
             )}
           </div>
+        </div>
+        {/* tab */}
+        <div className="md:p-5 mt-10">
+          <TabContainer id={id}/>
+        </div>
         </div>
       )}
     </>

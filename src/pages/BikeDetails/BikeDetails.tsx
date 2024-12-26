@@ -12,7 +12,7 @@ const BikeDetails = () => {
     <Container>
       <SectionHeading text="" title="Bike Details" width="w-1/6" />
       {data && (
-        <BikeDetailsContainer data={data?.data} isLoading={isLoading}/>
+        <BikeDetailsContainer data={data?.data} isLoading={isLoading} id={id}/>
       )}
     </Container>
   );
