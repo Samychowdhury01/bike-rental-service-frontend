@@ -17,7 +17,7 @@ import { useAdvancePaymentMutation } from "@/redux/api/payment/paymentApi";
 const BookNow = ({ bookingInfo }) => {
   const [open, setOpen] = useState(false);
   const { register, handleSubmit } = useForm();
-  const [advancePayment, {isLoading}] = useAdvancePaymentMutation();
+  const [advancePayment, { isLoading }] = useAdvancePaymentMutation();
 
   const onSubmit = async (data: Record<string, unknown>) => {
     const createBookingData = {
@@ -38,7 +38,11 @@ const BookNow = ({ bookingInfo }) => {
       <>
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
-            <Button disabled={!bookingInfo?.isUserExist || !bookingInfo.isAvailable}>Book Now !</Button>
+            <Button
+              disabled={!bookingInfo?.isUserExist || !bookingInfo.isAvailable}
+            >
+              Book Now !
+            </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
@@ -50,7 +54,7 @@ const BookNow = ({ bookingInfo }) => {
             <div className="grid gap-4 py-4">
               <div className="grid grid-cols-4 items-center gap-4">
                 <Label htmlFor="name" className="text-right">
-                  Name
+                  Date
                 </Label>
                 <Input
                   {...register("startTime", { required: true })}
@@ -62,7 +66,9 @@ const BookNow = ({ bookingInfo }) => {
               </div>
             </div>
             <DialogFooter>
-              <Button disabled={isLoading} onClick={handleSubmit(onSubmit)}>Advance Payment</Button>
+              <Button disabled={isLoading} onClick={handleSubmit(onSubmit)}>
+                Advance Payment
+              </Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>

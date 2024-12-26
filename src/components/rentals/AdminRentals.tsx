@@ -17,7 +17,6 @@ const AdminRentals = () => {
   const { data, isLoading } = useGetAllBookingQuery("");
   const [returnBike] = useUpdateBookingMutation();
 
-console.log(data);
   //   Handle Calculate
   const HandleCalculate = async (id: string) => {
     const response = await returnBike(id);

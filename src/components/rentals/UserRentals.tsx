@@ -21,11 +21,7 @@ const UserRentals = () => {
   }
   return (
     <>
-      {!data?.data.length ? (
-        <div className="mt-10 text-center text-xl text-red-500">
-          <p>You didn't rent bikes yet</p>
-        </div>
-      ) : (
+
         <Tabs defaultValue="unpaid">
           <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="unpaid">Unpaid</TabsTrigger>
@@ -38,7 +34,7 @@ const UserRentals = () => {
             <PaidRental paidRental={paidRental} loading={isLoading} />
           </TabsContent>
         </Tabs>
-      )}
+      
     </>
   );
 };

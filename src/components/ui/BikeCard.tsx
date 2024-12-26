@@ -56,7 +56,7 @@ const BikeCard = ({ role, item }: { role: string; item: any }) => {
           <CardTitle>{item.name}</CardTitle>
         </CardHeader>
         <CardContent className="md:h-32">
-          <p>
+          <p className="line-clamp-2">
             <span className="font-semibold mr-1">Description:</span>
             {item.description}
           </p>
@@ -84,7 +84,10 @@ const BikeCard = ({ role, item }: { role: string; item: any }) => {
             </div>
           ) : (
             <Button>
-              <Link to={`/details/${item._id}`}>View Details</Link>
+              <Link 
+              to={`/details/${item._id}`}
+              target="_blank"
+              >View Details</Link>
             </Button>
           )}
         </CardFooter>

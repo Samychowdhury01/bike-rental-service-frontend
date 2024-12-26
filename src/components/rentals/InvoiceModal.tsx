@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -10,33 +9,48 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { useMakePaymentMutation } from "@/redux/api/payment/paymentApi";
 
 interface InvoiceModalProps {
   totalAmount: number;
+  bikeId: string;
+  bookingId: string;
 }
 
-export default function InvoiceModal({ totalAmount }: InvoiceModalProps) {
-  //   const [couponCode, setCouponCode] = useState('')
-  //   const [discount, setDiscount] = useState(0)
-  const coupon = localStorage.getItem("coupon") || 'No Discount';
-  const couponValue = parseInt(localStorage.getItem("value")) || 0;
-  const afterDiscount = (totalAmount * couponValue) / 100;
-  const discountGot = totalAmount - afterDiscount
-//   const applyCoupon = () => {
-//     if (couponCode === "DISCOUNT10") {
-//       setDiscount(totalAmount * 0.1);
-//     } else if (couponCode === "DISCOUNT20") {
-//       setDiscount(totalAmount * 0.2);
-//     } else {
-//       setDiscount(0);
-//     }
-//   };
+export default function InvoiceModal({
+  totalAmount,
+  bikeId,
+  bookingId,
+}: InvoiceModalProps) {
+  const [makePayment, { isLoading }] = useMakePaymentMutation();
 
+  const coupon = localStorage.getItem("coupon") || "No Discount";
+  const couponValue = parseInt(localStorage.getItem("value")) || 0;
+  const discountGot = (totalAmount * couponValue) / 100;
+  const afterDiscount = totalAmount - discountGot;
+
+  const handlePayment = async () => {
+    const createBookingData = {
+      bookingId,
+      bikeId,
+      totalAmount,
+      amount: afterDiscount,
+    };
+
+    const response = await makePayment(createBookingData);
+    if (response.data) {
+      console.log(response?.data);
+      window.location.href = response.data.data.payment_url;
+    }
+  };
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">View Invoice</Button>
+        <Button 
+        size="sm"
+        disabled={isLoading || totalAmount === 0}
+        variant="outline">View Invoice</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -46,14 +60,14 @@ export default function InvoiceModal({ totalAmount }: InvoiceModalProps) {
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <label htmlFor="total" className="text-right font-medium">
+          <div className="flex items-center gap-4">
+            <label htmlFor="total" className="text-sm font-medium">
               Total Amount:
             </label>
             <div className="col-span-3">{totalAmount.toFixed(2)}TK</div>
           </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <label htmlFor="coupon" className="text-right font-medium">
+          <div className="flex items-center gap-4">
+            <label htmlFor="coupon" className="text-sm font-medium">
               Coupon Code:
             </label>
             <Input
@@ -67,8 +81,8 @@ export default function InvoiceModal({ totalAmount }: InvoiceModalProps) {
             {/* <Button onClick={applyCoupon}>Apply</Button> */}
           </div>
           {discountGot > 0 && (
-            <div className="grid grid-cols-4 items-center gap-4">
-              <label htmlFor="discount" className="text-right font-medium">
+            <div className="flex items-center gap-4">
+              <label htmlFor="discount" className="text-sm font-medium">
                 Discount:
               </label>
               <div className="col-span-3 text-green-600">
@@ -76,8 +90,8 @@ export default function InvoiceModal({ totalAmount }: InvoiceModalProps) {
               </div>
             </div>
           )}
-          <div className="grid grid-cols-4 items-center gap-4">
-            <label htmlFor="final" className="text-right font-medium">
+          <div className="flex items-center gap-4">
+            <label htmlFor="final" className="text-sm font-medium">
               Final Amount:
             </label>
             <div className="col-span-3 font-bold">
@@ -85,7 +99,16 @@ export default function InvoiceModal({ totalAmount }: InvoiceModalProps) {
             </div>
           </div>
         </div>
-        <DialogFooter></DialogFooter>
+        <DialogFooter>
+          <Button
+            onClick={handlePayment}
+            // disabled={isLoading || totalAmount === 0}
+            size="sm"
+            variant="outline"
+          >
+            Pay
+          </Button>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );
