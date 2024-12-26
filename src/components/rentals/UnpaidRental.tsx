@@ -10,6 +10,7 @@ import {
 import { Button } from "../ui/button";
 import { formatDate } from "@/utils/formatDate";
 import { useMakePaymentMutation } from "@/redux/api/payment/paymentApi";
+import InvoiceModal from "./InvoiceModal";
 
 const UnpaidRental = ({ unpaidRental, loading }) => {
   const [makePayment, { isLoading }] = useMakePaymentMutation();
@@ -21,10 +22,10 @@ const UnpaidRental = ({ unpaidRental, loading }) => {
       totalCost,
       amount: totalCost,
     };
-    console.log(createBookingData);
 
     const response = await makePayment(createBookingData);
     if (response.data) {
+      console.log(response?.data)
       window.location.href = response.data.data.payment_url;
     }
   };
@@ -81,6 +82,7 @@ const UnpaidRental = ({ unpaidRental, loading }) => {
                       >
                         Pay
                       </Button>
+                      <InvoiceModal totalAmount={rental.totalCost}/>
                     </div>
                   </TableCell>
                 </TableRow>

@@ -18,11 +18,11 @@ const Partner = () => {
       />
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 items-center md:gap-0">
         {images.map((img, index) => (
-          <div className="md:w-48 h-56 md:h-32" key={index}>
+          <div className="w-48 h-56 md:h-32 mx-auto" key={index}>
             <img
               src={img}
               alt="partner"
-              className="partner-img object-fill md:object-contain w-full h-full"
+              className="partner-img object-contain w-full h-full"
             />
           </div>
         ))}

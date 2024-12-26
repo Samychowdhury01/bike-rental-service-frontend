@@ -59,6 +59,8 @@ const WheelComponent = () => {
       });
       setModalVisible(false);
     });
+    localStorage.setItem("coupon", couponCode);
+    localStorage.setItem("value", `${prizeValue}`);
   };
 
   return (
