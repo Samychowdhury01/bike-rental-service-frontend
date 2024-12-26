@@ -14,9 +14,9 @@ const WheelComponent = () => {
 
   const data = [
     { option: "10", coupon: "getYour10" },
-    { option: "20", coupon: "abc123xyz" },
+    { option: "20", coupon: "offer20" },
     { option: "30", coupon: "promo30off" },
-    { option: "10", coupon: "save50now" },
+    { option: "50", coupon: "save50now" },
   ];
 
   const backgroundColors = ["#0D47A1", "#70bbe0", "#42A5F5", "#BBDEFB"];
