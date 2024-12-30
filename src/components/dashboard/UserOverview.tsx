@@ -8,7 +8,7 @@ import BikesTable from "./BikesTable";
 const UserOverview = () => {
   const { data, isLoading } = useGetDashboardDataQuery("");
 
-  const ReturnedBikes = data?.data?.bookings.filter(
+  const ReturnedBikes = data?.data?.bookings?.filter(
     (booking) => booking?.isReturned
   ).length;
 

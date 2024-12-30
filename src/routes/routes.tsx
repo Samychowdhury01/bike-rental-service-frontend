@@ -20,6 +20,9 @@ import Overview from "@/components/dashboard/Overview";
 import Contact from "@/pages/Contact/Contact";
 import Privacy from "@/pages/Privacy/Privacy";
 import Terms from "@/pages/Terms/Terms";
+import PaymentHistoryPage from "@/pages/PaymentHistory/PaymentHistoryPage";
+import CancelRidesPage from "@/pages/CancelRides/CancelRidesPage";
+import ReviewPage from "@/pages/ReviewPage/ReviewPage";
 
 const router = createBrowserRouter([
   {
@@ -118,6 +121,30 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Rental />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/reviews",
+        element: (
+          <PrivateRoute>
+            <ReviewPage />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/payment-history",
+        element: (
+          <PrivateRoute>
+            <PaymentHistoryPage />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/cancel-rides",
+        element: (
+          <PrivateRoute>
+            <CancelRidesPage />
           </PrivateRoute>
         ),
       },

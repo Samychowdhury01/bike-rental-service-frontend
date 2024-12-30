@@ -1,16 +1,15 @@
-
 import { Outlet } from "react-router-dom";
-import Navbar from "../ui/Navbar";
 
 import SideNav from "../dashboard/SideNav";
+import TopNav from "../dashboard/TopNav";
 
 const DashboardLayout = () => {
   return (
     <>
-      <Navbar />
+      <TopNav />
 
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-5">
-        <div className="lg:h-screen">
+        <div className="relative lg:h-screen lg:min-h-full">
           <SideNav />
         </div>
         <div className="lg:col-span-4 lg:mt-5 lg:p-5">

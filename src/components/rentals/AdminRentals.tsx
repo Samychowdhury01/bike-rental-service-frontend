@@ -13,14 +13,23 @@ import {
 } from "@/components/ui/table";
 import { Button } from "../ui/button";
 import { formatDate } from "@/utils/formatDate";
+import { useState } from "react";
+import { TQuery } from "@/types/query.types";
+import CustomPagination from "../ui/CustomPagination";
+
 const AdminRentals = () => {
-  const { data, isLoading } = useGetAllBookingQuery("");
+  const [query, setQuery] = useState<TQuery>({
+    limit: 10,
+    page: 1,
+  });
+  const { data, isLoading } = useGetAllBookingQuery(query);
   const [returnBike] = useUpdateBookingMutation();
+  const totalPages = data?.meta?.totalPage;
 
   //   Handle Calculate
   const HandleCalculate = async (id: string) => {
     const response = await returnBike(id);
-    
+
     console.log(response);
   };
 
@@ -77,6 +86,11 @@ const AdminRentals = () => {
           </Table>
         }
       </div>
+      {totalPages > 1 &&<CustomPagination
+        query={query}
+        setQuery={setQuery}
+        totalPages={totalPages}
+      />}
     </>
   );
 };

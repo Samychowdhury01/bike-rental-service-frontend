@@ -3,13 +3,15 @@ import { Rating } from "@smastrom/react-rating";
 import { Card, CardContent } from "../ui/card";
 import ReviewCard from "./ReviewCard";
 import WriteReview from "./WriteReview";
-import { useGetAllReviewsQuery } from "@/redux/api/review/reviewApi";
+import { useGetAllReviewsForSingleBikeQuery } from "@/redux/api/review/reviewApi";
 import useDecodeToken from "@/hooks/useDecodeToken";
 
 const UserReview = ({ bikeId }) => {
   const user: any = useDecodeToken();
-  const { data: reviews, isFetching } = useGetAllReviewsQuery(bikeId);
-  const averageRating = parseInt((reviews?.data?.averageRating)?.toFixed(2))
+  const { data: reviews, isFetching } =
+    useGetAllReviewsForSingleBikeQuery(bikeId);
+  const averageRating = parseInt(reviews?.data?.averageRating?.toFixed(2));
+  console.log(reviews);
   return (
     <Card className="p-5">
       <CardContent className="flex flex-col md:flex-row md:items-center md:justify-around gap-4">

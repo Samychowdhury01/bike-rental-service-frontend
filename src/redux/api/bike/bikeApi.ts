@@ -11,7 +11,6 @@ const bikeApi = baseApi.injectEndpoints({
             params.append(key, query[key]);
           });
         }
-        console.log('from line 14 api', params);
         return {
           url: "/bikes",
           method: "GET",

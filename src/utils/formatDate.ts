@@ -12,6 +12,7 @@ export const formatDate = (dateString) => {
       minute: "2-digit",
       second: "2-digit",
     };
+    console.log(dateString);
     const formattedDate = date.toLocaleDateString("en-US", options);
     return formattedDate;
   };

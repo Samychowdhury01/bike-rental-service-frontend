@@ -6,7 +6,7 @@ const ReviewCard = ({ review }) => {
     <Card>
       <CardContent>
         <div className="space-y-3 p-3">
-          <h4 className="text-sm font-semibold">{review?.userName}</h4>
+          <h4 className="text-sm font-semibold">{review?.userName || review?.name}</h4>
           <Rating style={{ maxWidth: 100 }} value={review?.rating} readOnly />
           <p className="text-sm">{review?.review}</p>
         </div>

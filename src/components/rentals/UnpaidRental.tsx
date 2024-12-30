@@ -11,13 +11,15 @@ import { formatDate } from "@/utils/formatDate";
 
 import InvoiceModal from "./InvoiceModal";
 import { Button } from "../ui/button";
-import { useUpdateBookingMutation } from "@/redux/api/booking/bookingApi";
+import { useCancelBookingMutation } from "@/redux/api/booking/bookingApi";
 import Swal from "sweetalert2";
+import { isGreaterThan24Hours } from "@/utils/isGreaterThan24Hours";
+
 
 const UnpaidRental = ({ unpaidRental, loading }) => {
-  const [returnBike, {isLoading}] = useUpdateBookingMutation();
+  const [cancelRide, { isLoading }] = useCancelBookingMutation();
   // handle cancel payment
-  const HandleCalculate =  (id: string) => {
+  const HandleCancelBooking = (id: string) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -25,22 +27,19 @@ const UnpaidRental = ({ unpaidRental, loading }) => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
-    }).then(async(result) => {
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        const response = await returnBike(id);
-        if(response?.data?.success){
+        const response = await cancelRide(id);
+        if (response?.data?.success) {
           Swal.fire({
             title: "Canceled!",
             text: "Your booking has been canceled.",
-            icon: "success"
+            icon: "success",
           });
         }
-       
       }
     });
-    
-
   };
   if (!unpaidRental) {
     return (
@@ -52,52 +51,56 @@ const UnpaidRental = ({ unpaidRental, loading }) => {
   return (
     <>
       <div>
-        {
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Bike</TableHead>
-                <TableHead>Start Time</TableHead>
-                <TableHead>Return Time</TableHead>
-                <TableHead>Total Cost</TableHead>
-                <TableHead>Pay</TableHead>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Bike</TableHead>
+              <TableHead>Start Time</TableHead>
+              <TableHead>Return Time</TableHead>
+              <TableHead>Total Cost</TableHead>
+              <TableHead>Pay</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {unpaidRental?.map((rental) => (
+              <TableRow key={rental._id}>
+                <TableCell className="font-medium">
+                  {rental?.bikeId?.name}
+                </TableCell>
+                <TableCell className="font-medium">
+                  {formatDate(rental.startTime)}
+                </TableCell>
+                <TableCell>
+                  {rental.returnTime
+                    ? formatDate(rental.returnTime)
+                    : " Not returned yet"}
+                </TableCell>
+                <TableCell>{rental.totalCost} TK</TableCell>
+                <TableCell>
+                  <div className="flex gap-2">
+                    <InvoiceModal
+                      totalAmount={rental.totalCost}
+                      bookingId={rental._id}
+                      bikeId={rental.bikeId._id}
+                    />
+                    <Button
+                      disabled={
+                        rental?.isReturned ||
+                        isLoading ||
+                        isGreaterThan24Hours(rental?.createdAt)
+                      }
+                      onClick={() => HandleCancelBooking(rental._id)}
+                      variant="destructive"
+                      size="sm"
+                    >
+                      Cancel
+                    </Button>
+                  </div>
+                </TableCell>
               </TableRow>
-            </TableHeader>
-            <TableBody>
-              {unpaidRental?.map((rental) => (
-                <TableRow key={rental._id}>
-                  <TableCell className="font-medium">
-                    {rental?.bikeId?.name}
-                  </TableCell>
-                  <TableCell className="font-medium">
-                    {formatDate(rental.startTime)}
-                  </TableCell>
-                  <TableCell>
-                    {rental.returnTime
-                      ? formatDate(rental.returnTime)
-                      : " Not returned yet"}
-                  </TableCell>
-                  <TableCell>{rental.totalCost} TK</TableCell>
-                  <TableCell>
-                    <div className="flex gap-2">
-                      <InvoiceModal
-                        totalAmount={rental.totalCost}
-                        bookingId={rental._id}
-                        bikeId={rental.bikeId._id}
-                      />
-                      <Button 
-                      disabled={rental?.isReturned || isLoading}
-                      onClick={()=> HandleCalculate(rental._id)}
-                      variant="destructive" size="sm">
-                        Cancel
-                      </Button>
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        }
+            ))}
+          </TableBody>
+        </Table>
       </div>
     </>
   );
