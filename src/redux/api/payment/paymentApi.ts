@@ -8,6 +8,7 @@ const paymentApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["booking", "payment"],
     }),
     makePayment: builder.mutation({
       query: (data) => ({
@@ -15,6 +16,14 @@ const paymentApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["booking", "payment"],
+    }),
+    PayThroughPoint: builder.mutation({
+      query: (rentalId) => ({
+        url: `/payment/use-points/${rentalId}`,
+        method: "PUT",
+      }),
+      invalidatesTags: ["booking", "payment"],
     }),
     getUserPaymentHistory: builder.query({
       query: (query) => {
@@ -30,6 +39,7 @@ const paymentApi = baseApi.injectEndpoints({
           params: params,
         };
       },
+      providesTags: ["payment"],
     }),
     getPaymentHistory: builder.query({
       query: (query) => {
@@ -45,6 +55,7 @@ const paymentApi = baseApi.injectEndpoints({
           params: params,
         };
       },
+      providesTags: ["payment"],
     }),
   }),
 });
@@ -54,4 +65,5 @@ export const {
   useMakePaymentMutation,
   useGetUserPaymentHistoryQuery,
   useGetPaymentHistoryQuery,
+  usePayThroughPointMutation,
 } = paymentApi;

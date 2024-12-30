@@ -9,20 +9,31 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useMakePaymentMutation } from "@/redux/api/payment/paymentApi";
+import {
+  useMakePaymentMutation,
+  usePayThroughPointMutation,
+} from "@/redux/api/payment/paymentApi";
+import { Separator } from "../ui/separator";
+import Swal from "sweetalert2";
+import { useState } from "react";
 
 interface InvoiceModalProps {
   totalAmount: number;
   bikeId: string;
   bookingId: string;
+  points: number;
 }
 
 export default function InvoiceModal({
   totalAmount,
   bikeId,
   bookingId,
+  points,
 }: InvoiceModalProps) {
+  const [open, setOpen] = useState(false);
   const [makePayment, { isLoading }] = useMakePaymentMutation();
+  const [makePaymentWithPoints, { isLoading: isUsePointLoading }] =
+    usePayThroughPointMutation();
 
   const coupon = localStorage.getItem("coupon") || "No Discount";
   const couponValue = parseInt(localStorage.getItem("value")) || 0;
@@ -43,14 +54,36 @@ export default function InvoiceModal({
       window.location.href = response.data.data.payment_url;
     }
   };
+  const handlePayThroughPoints = async () => {
+    const response = await makePaymentWithPoints(bookingId);
+    if (response.data) {
+      Swal.fire({
+        title: "Payment Successful",
+        text: "Payment Successful",
+        icon: "success",
+      });
+      setOpen(false);
+    } else {
+      Swal.fire({
+        title: "Payment Failed",
+        text: "Payment Failed",
+        icon: "error",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+  };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button 
-        size="sm"
-        disabled={isLoading || totalAmount === 0}
-        variant="outline">View Invoice</Button>
+        <Button
+          size="sm"
+          disabled={isLoading || totalAmount === 0}
+          variant="outline"
+        >
+          View Invoice
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -100,13 +133,17 @@ export default function InvoiceModal({
           </div>
         </div>
         <DialogFooter>
+          <Button onClick={handlePayment} size="sm">
+            Pay
+          </Button>
+          <Separator orientation="vertical" />
           <Button
-            onClick={handlePayment}
-            // disabled={isLoading || totalAmount === 0}
+            onClick={handlePayThroughPoints}
+            disabled={points < totalAmount || isUsePointLoading}
             size="sm"
             variant="outline"
           >
-            Pay
+            Use Points
           </Button>
         </DialogFooter>
       </DialogContent>

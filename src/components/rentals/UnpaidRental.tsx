@@ -80,8 +80,9 @@ const UnpaidRental = ({ unpaidRental, loading }) => {
                   <div className="flex gap-2">
                     <InvoiceModal
                       totalAmount={rental.totalCost}
-                      bookingId={rental._id}
-                      bikeId={rental.bikeId._id}
+                      bookingId={rental?._id}
+                      bikeId={rental?.bikeId._id}
+                      points={rental?.userId?.points}
                     />
                     <Button
                       disabled={
